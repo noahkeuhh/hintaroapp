@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import './lib/backend-pinger';
 
 // Debug: Check environment variables
 console.log('🔍 Environment Check:');
