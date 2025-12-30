@@ -115,6 +115,12 @@ router.post('/action', authenticateUser, rateLimit, idempotencyCheck, async (req
       });
     }
 
+    // Get user early (needed for tier checks)
+    const user = await getUserById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
     // Image upload restriction: only Plus and Max tiers
     if (images && images.length > 0 && (user.subscription_tier === 'free' || user.subscription_tier === 'pro')) {
       return res.status(403).json({
@@ -144,12 +150,6 @@ router.post('/action', authenticateUser, rateLimit, idempotencyCheck, async (req
 
     // Check and reset daily credits if needed
     await checkAndResetDailyCredits(userId);
-
-    // Get user
-    const user = await getUserById(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
 
     // Check subscription tier limits
     const tier = config.subscriptionTiers[user.subscription_tier as keyof typeof config.subscriptionTiers];
