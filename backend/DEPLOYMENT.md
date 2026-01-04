@@ -109,6 +109,20 @@ vercel --prod
 4. Start command: `npm start`
 5. Set environment variables
 
+**Important: Prevent Sleep Mode**
+
+Render's free tier puts services to sleep after 15 minutes of inactivity. This app includes automatic prevention:
+
+- **Backend**: `startKeepAliveJob()` runs every 5 minutes (see `src/jobs/keep-alive.job.ts`)
+- **Frontend**: `backend-pinger` runs every 5 minutes (see `src/lib/backend-pinger.ts`)
+- Both keep the service awake indefinitely
+
+**Monitoring:** Check logs for:
+- `💚 Backend keep-alive ping` messages
+- `✅ Backend pinged successfully` from frontend
+
+If you see long gaps without these messages, the service may be sleeping.
+
 **Cron Jobs:** Use Render Cron Jobs or external service
 
 ### 4. DigitalOcean App Platform

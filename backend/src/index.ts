@@ -3,6 +3,7 @@ import cors from 'cors';
 import { config } from './config/index.js';
 import routes from './routes/index.js';
 import { startDailyResetJob } from './jobs/daily-reset.job.js';
+import { startKeepAliveJob } from './jobs/keep-alive.job.js';
 
 const app = express();
 
@@ -58,9 +59,10 @@ app.listen(PORT, () => {
   console.log(`🔗 API available at http://localhost:${PORT}/api`);
 });
 
-// Start daily reset cron job
+// Start cron jobs
 if (config.app.nodeEnv !== 'test') {
   startDailyResetJob();
+  startKeepAliveJob(); // Prevent Render sleep
 }
 
 // Graceful shutdown
