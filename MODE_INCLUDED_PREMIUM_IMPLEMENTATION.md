@@ -1,7 +1,7 @@
-# MessageMind "Mode-Included Premium" Implementation Guide
+# Hintaro "Mode-Included Premium" Implementation Guide
 
 ## Overview
-This document describes the updated MessageMind credit and analysis system with "Mode-Included Premium" logic, which makes Plus and Max tiers feel premium without upgrade friction.
+This document describes the updated Hintaro credit and analysis system with "Mode-Included Premium" logic, which makes Plus and Max tiers feel premium without upgrade friction.
 
 ## Changes Implemented
 

@@ -167,7 +167,7 @@ const ResetPassword = () => {
             <MessageCircle className="h-6 w-6 text-white" />
           </div>
           <span className="text-2xl font-display font-bold text-white">
-            MessageMind
+            Hintaro
           </span>
         </Link>
 

@@ -133,7 +133,7 @@ async function checkConfig() {
 }
 
 async function main() {
-  console.log('🚀 AI Flirt Studio - Setup Verification\n');
+  console.log('🚀 Hintaro - Setup Verification\n');
   console.log('=' .repeat(50));
 
   const configOk = await checkConfig();

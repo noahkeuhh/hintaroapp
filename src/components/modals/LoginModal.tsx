@@ -52,7 +52,7 @@ export const LoginModal = ({ isOpen, onClose, onSuccess, onSwitchToSignup }: Log
       
       toast({
         title: "Logged in!",
-        description: "Welcome back to MessageMind.",
+        description: "Welcome back to Hintaro.",
       });
       
       onClose();

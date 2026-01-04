@@ -18,7 +18,7 @@ import { routeModel } from '../services/model-routing.service.js';
 
 const router = Router();
 
-// POST /api/user/action (MessageMind specification)
+// POST /api/user/action (Hintaro specification)
 const actionSchema = z.object({
   user_id: z.string().uuid().optional(), // Optional, will use authenticated user
   input_text: z.string().optional(),

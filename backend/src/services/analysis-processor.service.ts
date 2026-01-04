@@ -98,7 +98,7 @@ export async function processAnalysisJob(
       tokens_used: result.tokens_used,
     };
 
-    // Add new MessageMind fields - store full JSON response (always includes interest_level)
+    // Add new Hintaro fields - store full JSON response (always includes interest_level)
     updateData.analysis_json = result;
     updateData.tokens_actual = result.tokens_used;
     

@@ -1,4 +1,4 @@
--- MessageMind Database Migration
+-- Hintaro Database Migration
 -- Adds new fields and tables for the complete system
 
 -- Add new columns to analyses table

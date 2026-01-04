@@ -23,7 +23,7 @@ export const Footer = () => {
                 WebkitTextFillColor: "transparent"
               }}
             >
-              MessageMind
+              Hintaro
             </span>
           </Link>
 
@@ -43,7 +43,7 @@ export const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            © 2025 MessageMind. All rights reserved.
+            © 2025 Hintaro. All rights reserved.
           </p>
         </div>
       </div>

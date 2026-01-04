@@ -100,7 +100,7 @@ export const DashboardSidebar = () => {
                 WebkitTextFillColor: "transparent"
               }}
             >
-              MessageMind
+              Hintaro
             </span>
           )}
         </Link>

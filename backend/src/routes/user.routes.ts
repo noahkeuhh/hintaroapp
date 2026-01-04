@@ -68,7 +68,7 @@ router.get('/credits', authenticateUser, rateLimit, async (req: AuthenticatedReq
   }
 });
 
-// POST /api/user/action (MessageMind - new implementation)
+// POST /api/user/action (Hintaro - new implementation)
 import { 
   calculateDynamicCredits, 
   generateAnalysisHash, 
@@ -329,7 +329,7 @@ router.post('/action', authenticateUser, rateLimit, idempotencyCheck, async (req
       status: 'queued',
     };
 
-    // Add new MessageMind fields (use actual mode and model from routing)
+    // Add new Hintaro fields (use actual mode and model from routing)
     analysisData.mode = actualMode;
     analysisData.model_version = model;
     analysisData.tokens_estimated = creditCalc.tokensEstimated;

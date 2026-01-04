@@ -12,7 +12,7 @@ export interface ModelRoutingResult {
 }
 
 /**
- * Route AI model based on tier and mode - MessageMind "Mode-Included Premium" logic
+ * Route AI model based on tier and mode - Hintaro "Mode-Included Premium" logic
  * 
  * This implements the tier-specific mode defaults and routing per the spec:
  * 

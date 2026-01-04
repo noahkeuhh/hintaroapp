@@ -67,7 +67,7 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
             <span className={`text-xl font-bold font-display transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             }`}>
-              MessageMind
+              Hintaro
             </span>
           </Link>
 

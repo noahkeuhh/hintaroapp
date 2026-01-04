@@ -29,7 +29,7 @@ const LandingContent = () => {
 
   return (
     <main className="min-h-screen bg-[#07090F]">
-      <title>MessageMind - Stop second-guessing dating messages</title>
+      <title>Hintaro - Stop second-guessing dating messages</title>
       
       <Navbar 
         onSignupClick={() => setIsSignupOpen(true)}

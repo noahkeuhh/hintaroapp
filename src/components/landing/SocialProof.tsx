@@ -82,7 +82,7 @@ export const SocialProof = () => {
             What users say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Thousands use MessageMind to get clarity on their conversations
+            Thousands use Hintaro to get clarity on their conversations
           </p>
         </motion.div>
 

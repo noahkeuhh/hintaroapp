@@ -1,4 +1,4 @@
-# AI Flirt Studio
+# Hintaro
 
 AI-powered dating message analyzer with credits and subscription system.
 

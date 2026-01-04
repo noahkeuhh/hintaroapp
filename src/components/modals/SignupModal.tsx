@@ -60,7 +60,7 @@ export const SignupModal = ({ isOpen, onClose, onSuccess, onSwitchToLogin }: Sig
       
       toast({
         title: "Account created!",
-        description: "Welcome to MessageMind. Your account has been created.",
+        description: "Welcome to Hintaro. Your account has been created.",
       });
       
       onClose();

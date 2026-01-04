@@ -238,11 +238,11 @@ const Contact = () => {
                         Email
                       </p>
                       <a
-                        href="mailto:support@messagemind.nl"
+                        href="mailto:support@hintaro.com"
                         className="text-sm hover:underline"
                         style={{ color: "#9BA3B4" }}
                       >
-                        support@messagemind.nl
+                        support@hintaro.com
                       </a>
                     </div>
                   </div>

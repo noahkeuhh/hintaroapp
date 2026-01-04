@@ -51,7 +51,7 @@ export const Footer = () => {
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: "linear-gradient(135deg, hsl(180 85% 65%) 0%, hsl(248 73% 70%) 100%)" }}>
                 <MessageCircle className="h-6 w-6 text-white" />
               </div>
-              <span className="text-2xl font-bold font-display">MessageMind</span>
+              <span className="text-2xl font-bold font-display">Hintaro</span>
             </div>
             <p className="text-white/60 mb-8 max-w-sm leading-relaxed text-lg">
               Stop second-guessing every message. Get structured reads on dating messages.
@@ -150,7 +150,7 @@ export const Footer = () => {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10">
           <p className="text-white/40 text-sm mb-6 md:mb-0">
-            © 2025 MessageMind. All rights reserved.
+            © 2025 Hintaro. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {[

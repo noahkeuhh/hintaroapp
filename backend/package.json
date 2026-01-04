@@ -1,7 +1,7 @@
 {
-  "name": "ai-flirt-studio-backend",
+  "name": "hintaro-backend",
   "version": "1.0.0",
-  "description": "Backend API for AI Flirt Translator - Credits & Subscription Engine",
+  "description": "Backend API for Hintaro - Credits & Subscription Engine",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

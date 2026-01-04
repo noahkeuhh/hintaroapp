@@ -90,7 +90,7 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
                 WebkitTextFillColor: "transparent"
               }}
             >
-              MessageMind
+              Hintaro
             </span>
           </Link>
 

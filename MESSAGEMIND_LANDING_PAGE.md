@@ -1,4 +1,4 @@
-# MessageMind Landing Page
+# Hintaro Landing Page
 
 **Version:** 1.0  
 **Last updated:** December 28, 2025  
@@ -12,7 +12,7 @@
 Layout: Fixed top bar, backdrop blur, dark theme
 
 Left:
-Logo: MessageMind
+Logo: Hintaro
 
 Center navigation:
 How it works | Examples | Pricing | FAQ
@@ -91,7 +91,7 @@ The problem
 - Generic AI chats that ramble and never show risk.
 
 Right column:
-What MessageMind does
+What Hintaro does
 
 - Shows intent and tone in a fixed layout — not a long chat response.
 - Flags emotional risk and interest level with simple scores.
@@ -396,7 +396,7 @@ Links:
 Privacy | Terms | Contact
 
 Copyright:
-© 2025 MessageMind. All rights reserved.
+© 2025 Hintaro. All rights reserved.
 
 ---
 
@@ -548,7 +548,7 @@ Display: flex, justify-content: space-between, align-items: center
 Padding: 16px 24px
 
 Elements:
-Logo (left): Text "MessageMind" with glow animation
+Logo (left): Text "Hintaro" with glow animation
 Nav links (center): Horizontal list, smooth hover underline (2px, #5CE1E6)
 Actions (right): Primary button + "Log in" text link
 

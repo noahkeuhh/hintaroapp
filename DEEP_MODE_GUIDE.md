@@ -2,7 +2,7 @@
 
 ## How Deep Mode Works
 
-Deep mode is MessageMind's most advanced analysis tier, **exclusively for MAX subscribers**.
+Deep mode is Hintaro's most advanced analysis tier, **exclusively for MAX subscribers**.
 
 ### Automatic Mode Selection
 

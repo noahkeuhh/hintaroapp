@@ -39,7 +39,7 @@ export const WhyNotChatGPT = () => {
             Why not just use ChatGPT?
           </h2>
           <p className="text-xl" style={{ color: "#A7B1C5" }}>
-            You could. But MessageMind is purpose-built.
+            You could. But Hintaro is purpose-built.
           </p>
         </motion.div>
 

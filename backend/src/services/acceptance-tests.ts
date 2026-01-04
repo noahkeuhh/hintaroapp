@@ -1,5 +1,5 @@
 /**
- * Acceptance Tests - MessageMind "Mode-Included Premium" System
+ * Acceptance Tests - Hintaro "Mode-Included Premium" System
  * 
  * Test credit calculations and mode routing for all tier paths
  * Per specification section L

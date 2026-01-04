@@ -32,7 +32,7 @@ router.get('/metrics', requireAdmin, async (req, res) => {
       .select('*', { count: 'exact', head: true })
       .gt('credits_remaining', 0);
 
-    // Aggregate metrics (MessageMind format)
+    // Aggregate metrics (Hintaro format)
     const aggregated = {
       total_users: totalUsers || 0,
       active_users: activeUsers || 0,
