@@ -62,11 +62,11 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
       >
         <div className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group cursor-pointer z-10">
             <img 
               src="/img/apple-touch-icon.png" 
               alt="Hintaro" 
-              className="h-10 w-auto"
+              className="h-10 w-auto pointer-events-none"
             />
             <span 
               className="text-xl font-bold"
