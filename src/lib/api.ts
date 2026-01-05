@@ -147,7 +147,7 @@ export const api = {
     }>('/user/credits');
   },
 
-  // Actions (MessageMind format)
+  // Actions (Hintaro format)
   async executeAction(data: {
     mode: 'snapshot' | 'expanded' | 'deep';
     input_text?: string;

@@ -55,7 +55,7 @@ export const ProblemSolution = () => {
             </div>
           </motion.div>
 
-          {/* What MessageMind Does */}
+          {/* What Hintaro Does */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -73,7 +73,7 @@ export const ProblemSolution = () => {
             />
             <div className="relative">
               <h3 className="text-2xl font-bold mb-6" style={{ color: "#E9ECF5" }}>
-                What MessageMind does
+                What Hintaro does
               </h3>
               <div className="space-y-4">
                 {solutions.map((solution, index) => (

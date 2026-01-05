@@ -1,5 +1,5 @@
 {
-  "name": "messagemind",
+  "name": "hintaro",
   "private": true,
   "scripts": {
     "dev": "cd frontend && npm run dev",
