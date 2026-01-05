@@ -65,7 +65,7 @@ const ForgotPassword = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 mb-8 justify-center">
           <img 
-            src="/img/android-chrome-192x192.png" 
+            src="/img/apple-touch-icon.png" 
             alt="Hintaro" 
             className="h-10 w-auto"
           />

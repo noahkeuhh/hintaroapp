@@ -52,7 +52,7 @@ const Contact = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-6">
               <img 
-                src="/img/android-chrome-192x192.png" 
+                src="/img/apple-touch-icon.png" 
                 alt="Hintaro" 
                 className="h-12 w-auto"
               />

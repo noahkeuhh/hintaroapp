@@ -79,7 +79,7 @@ export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
       <div className="h-[62px] px-4 flex items-center border-b border-sidebar-border">
         <Link to="/dashboard" className="flex items-center gap-3">
           <img 
-            src="/img/android-chrome-192x192.png" 
+            src="/img/apple-touch-icon.png" 
             alt="Hintaro" 
             className="h-8 w-auto"
           />
