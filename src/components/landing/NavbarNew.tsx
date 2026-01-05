@@ -62,11 +62,20 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
       >
         <div className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group cursor-pointer z-10">
+          <a 
+            href="/" 
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            className="flex items-center gap-2 group cursor-pointer z-10"
+          >
             <img 
               src="/img/apple-touch-icon.png" 
               alt="Hintaro" 
-              className="h-10 w-auto pointer-events-none"
+              className="h-10 w-auto"
             />
             <span 
               className="text-xl font-bold"
@@ -78,7 +87,7 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
             >
               Hintaro
             </span>
-          </Link>
+          </a>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-10">
