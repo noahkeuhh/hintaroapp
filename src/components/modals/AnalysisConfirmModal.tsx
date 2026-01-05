@@ -34,26 +34,26 @@ export const AnalysisConfirmModal = ({
 }: AnalysisConfirmModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-accent" />
+          <DialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
             Confirm Analysis
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-sm">
             You're about to run an analysis. Please confirm the details below.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 py-4">
+        <div className="space-y-3 py-3 sm:space-y-4 sm:py-4">
           {/* Mode info */}
-          <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-            <div className="p-2 bg-accent/10 rounded-lg">
-              <FileText className="h-4 w-4 text-accent" />
+          <div className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="p-1.5 sm:p-2 bg-accent/10 rounded-lg">
+              <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
             </div>
             <div>
-              <p className="font-medium text-foreground capitalize">{mode} Mode</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-medium text-foreground capitalize text-sm sm:text-base">{mode} Mode</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 {MODE_DESCRIPTIONS[mode]}
               </p>
             </div>
@@ -61,13 +61,13 @@ export const AnalysisConfirmModal = ({
 
           {/* Image indicator */}
           {hasImage && (
-            <div className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
-              <div className="p-2 bg-accent/10 rounded-lg">
-                <ImageIcon className="h-4 w-4 text-accent" />
+            <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-muted/50 rounded-lg">
+              <div className="p-1.5 sm:p-2 bg-accent/10 rounded-lg">
+                <ImageIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Image Analysis</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="font-medium text-foreground text-sm sm:text-base">Image Analysis</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   +50 credits for visual content analysis
                 </p>
               </div>
@@ -75,23 +75,23 @@ export const AnalysisConfirmModal = ({
           )}
 
           {/* Credit cost */}
-          <div className="flex items-center justify-between p-4 bg-accent/5 border border-accent/20 rounded-lg">
+          <div className="flex items-center justify-between p-3 sm:p-4 bg-accent/5 border border-accent/20 rounded-lg">
             <div className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-accent" />
-              <span className="font-medium text-foreground">Total Cost</span>
+              <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <span className="font-medium text-foreground text-sm sm:text-base">Total Cost</span>
             </div>
-            <span className="text-xl font-bold text-accent">{credits} credits</span>
+            <span className="text-lg sm:text-xl font-bold text-accent">{credits} credits</span>
           </div>
         </div>
 
-        <DialogFooter className="gap-2 sm:gap-0">
-          <Button variant="outline" onClick={onClose}>
+        <DialogFooter className="gap-2 sm:gap-0 flex-col-reverse sm:flex-row">
+          <Button variant="outline" onClick={onClose} className="w-full sm:w-auto">
             Cancel
           </Button>
           <Button
             variant="hero"
             onClick={onConfirm}
-            className="gap-2"
+            className="gap-2 w-full sm:w-auto text-sm"
             data-api="/api/user/action"
             data-body={`{"mode": "${mode}", "credits": ${credits}, "hasImage": ${hasImage}}`}
           >

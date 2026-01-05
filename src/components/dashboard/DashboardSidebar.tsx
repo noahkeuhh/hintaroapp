@@ -151,10 +151,10 @@ export const DashboardSidebar = () => {
         })}
       </nav>
 
-      {/* Collapse toggle */}
+      {/* Collapse toggle - hidden on mobile */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-sidebar-accent rounded-full flex items-center justify-center text-sidebar-foreground hover:bg-sidebar-primary transition-colors shadow-lg"
+        className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-sidebar-accent rounded-full items-center justify-center text-sidebar-foreground hover:bg-sidebar-primary transition-colors shadow-lg"
       >
         {isCollapsed ? (
           <ChevronRight className="h-4 w-4" />

@@ -87,7 +87,7 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-background/80 backdrop-blur-md"
           onClick={handleClose}
         >
           <motion.div
@@ -95,13 +95,13 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="card-glass rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden border border-white/10"
+            className="card-glass rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-[calc(100vw-1.5rem)] sm:max-w-lg overflow-hidden border border-white/10 max-h-[90vh] overflow-y-auto"
           >
             {/* Header with gradient */}
-            <div className="relative p-8 text-center bg-gradient-to-br from-accent/10 via-transparent to-primary/10">
+            <div className="relative p-5 sm:p-8 text-center bg-gradient-to-br from-accent/10 via-transparent to-primary/10">
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-muted/20 rounded-lg"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-muted/20 rounded-lg"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -110,19 +110,19 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/15 border border-accent/40 flex items-center justify-center mx-auto mb-5 shadow-lg"
+                className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/15 border border-accent/40 flex items-center justify-center mx-auto mb-3 sm:mb-5 shadow-lg"
               >
-                <Zap className="h-10 w-10 text-accent" />
+                <Zap className="h-7 w-7 sm:h-10 sm:w-10 text-accent" />
               </motion.div>
 
-              <h2 className="text-2xl font-bold font-display text-foreground mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-1 sm:mb-2">
                 Buy Credit Packs
               </h2>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-xs sm:text-sm">
                 Get extra credits for more analyses
               </p>
               {currentTier !== "free" && (
-                <div className="mt-3 inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase">
+                <div className="mt-2 sm:mt-3 inline-block px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase">
                   {currentTier === "pro" && "Pro Tier"}
                   {currentTier === "plus" && "Plus Tier ⭐"}
                   {currentTier === "max" && "Max Tier 👑"}
@@ -131,8 +131,8 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
             </div>
 
             {/* Packs */}
-            <div className="p-6 space-y-3">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1 mb-2">
+            <div className="p-4 sm:p-6 space-y-2 sm:space-y-3">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1 mb-1 sm:mb-2">
                 Choose Your Pack
               </p>
               {creditPacks.map((pack, index) => (
@@ -142,41 +142,41 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => setSelectedPack(pack.id)}
-                  className={`w-full p-5 rounded-2xl border-2 transition-all text-left relative group ${
+                  className={`w-full p-3 sm:p-5 rounded-xl sm:rounded-2xl border-2 transition-all text-left relative group ${
                     selectedPack === pack.id
                       ? "border-accent bg-accent/10 shadow-lg scale-[1.02]"
                       : "border-white/10 hover:border-accent/40 bg-muted/20 hover:bg-muted/30 hover:scale-[1.01]"
                   }`}
                 >
                   {pack.popular && (
-                    <span className="absolute -top-2.5 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs font-bold flex items-center gap-1 shadow-lg">
-                      <Sparkles className="h-3 w-3" />
+                    <span className="absolute -top-2.5 right-3 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white text-[10px] sm:text-xs font-bold flex items-center gap-1 shadow-lg">
+                      <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                       Most Popular
                     </span>
                   )}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center border-2 transition-all ${
+                    <div className="flex items-center gap-2 sm:gap-4">
+                      <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl flex items-center justify-center border-2 transition-all ${
                         selectedPack === pack.id 
                           ? "bg-gradient-to-br from-primary/20 to-accent/15 border-accent/50" 
                           : "bg-muted/50 border-white/10 group-hover:border-accent/30"
                       }`}>
-                        <Zap className={`h-7 w-7 transition-colors ${
+                        <Zap className={`h-5 w-5 sm:h-7 sm:w-7 transition-colors ${
                           selectedPack === pack.id ? "text-accent" : "text-muted-foreground group-hover:text-accent"
                         }`} />
                       </div>
                       <div>
-                        <p className="font-bold text-foreground text-lg">
+                        <p className="font-bold text-foreground text-base sm:text-lg">
                           {pack.credits} Credits
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           ≈ {Math.floor(pack.credits / 5)} analyses
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-foreground">€{pack.price}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xl sm:text-2xl font-bold text-foreground">€{pack.price}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">
                         €{(pack.price / pack.credits).toFixed(2)}/credit
                       </p>
                     </div>
@@ -185,9 +185,9 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute top-3 right-3 w-6 h-6 rounded-full bg-accent flex items-center justify-center"
+                      className="absolute top-2 right-2 sm:top-3 sm:right-3 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-accent flex items-center justify-center"
                     >
-                      <Check className="h-4 w-4 text-white" />
+                      <Check className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                     </motion.div>
                   )}
                 </motion.button>
@@ -195,28 +195,28 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
             </div>
 
             {/* Payment info */}
-            <div className="px-6 pb-6 space-y-4">
-              <div className="card-elevated rounded-2xl p-5 border border-white/5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-accent/10">
-                    <CreditCard className="h-5 w-5 text-accent" />
+            <div className="px-4 pb-4 sm:px-6 sm:pb-6 space-y-3 sm:space-y-4">
+              <div className="card-elevated rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-white/5">
+                <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-accent/10">
+                    <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Secure Payment</p>
-                    <p className="text-xs text-muted-foreground">Powered by Stripe</p>
+                    <p className="text-xs sm:text-sm font-semibold text-foreground">Secure Payment</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Powered by Stripe</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <div className="px-3 py-1.5 bg-card rounded-lg border border-white/10 text-xs font-medium text-foreground">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
                     💳 Visa
                   </div>
-                  <div className="px-3 py-1.5 bg-card rounded-lg border border-white/10 text-xs font-medium text-foreground">
+                  <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
                     💳 Mastercard
                   </div>
-                  <div className="px-3 py-1.5 bg-card rounded-lg border border-white/10 text-xs font-medium text-foreground">
+                  <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
                     🏦 iDEAL
                   </div>
-                  <div className="px-3 py-1.5 bg-card rounded-lg border border-white/10 text-xs font-medium text-muted-foreground">
+                  <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-muted-foreground">
                     +more
                   </div>
                 </div>
@@ -225,19 +225,19 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
               <Button
                 variant="hero"
                 size="lg"
-                className="w-full text-base h-14 hover:scale-[1.02] transition-transform"
+                className="w-full text-sm sm:text-base h-12 sm:h-14 hover:scale-[1.02] transition-transform"
                 onClick={handlePurchase}
                 disabled={!selectedPack || isLoading}
                 data-api="/api/user/buy_pack"
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Processing payment...
+                    <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                    <span className="text-sm">Processing...</span>
                   </>
                 ) : (
-                  <div className="flex items-center gap-3">
-                    <Zap className="h-5 w-5" />
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <Zap className="h-4 w-4 sm:h-5 sm:w-5" />
                     <span>
                       Buy {creditPacks.find(p => p.id === selectedPack)?.credits} Credits — €{creditPacks.find(p => p.id === selectedPack)?.price}
                     </span>
@@ -245,7 +245,7 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                 )}
               </Button>
 
-              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+              <div className="flex items-center justify-center gap-2 text-[10px] sm:text-xs text-muted-foreground">
                 <div className="w-1.5 h-1.5 rounded-full bg-success/50"></div>
                 <p>Credits added instantly after payment</p>
               </div>
