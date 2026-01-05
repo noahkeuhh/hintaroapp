@@ -14,7 +14,7 @@ export const Footer = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src="/img/icon.png" 
+              src="/img/android-chrome-192x192.png" 
               alt="Hintaro" 
               className="h-8 w-auto"
             />

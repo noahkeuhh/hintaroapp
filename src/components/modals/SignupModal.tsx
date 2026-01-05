@@ -136,7 +136,7 @@ export const SignupModal = ({ isOpen, onClose, onSuccess, onSwitchToLogin }: Sig
               </button>
               <div className="flex items-center gap-3">
                 <img 
-                  src="/img/icon.png" 
+                  src="/img/android-chrome-192x192.png" 
                   alt="Hintaro" 
                   className="h-10 sm:h-12 w-auto"
                 />
