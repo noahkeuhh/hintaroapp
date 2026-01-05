@@ -203,15 +203,15 @@ export const AnalysisDetailModal = ({ isOpen, onClose, analysisId, onAnalysisIdC
             className="bg-background rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col border border-border"
           >
             {/* Header */}
-            <div className="relative bg-gradient-hero p-6 flex-shrink-0">
+            <div className="relative bg-accent p-6 flex-shrink-0">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
-              <h2 className="text-xl font-bold font-display text-primary-foreground">
-                Analyse Details
+              <h2 className="text-xl font-bold font-display text-white">
+                Analysis Details
               </h2>
             </div>
 
