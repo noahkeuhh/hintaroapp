@@ -127,9 +127,11 @@ export const LoginModal = ({ isOpen, onClose, onSuccess, onSwitchToSignup }: Log
                 <X className="h-5 w-5" />
               </button>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                  <Lock className="h-6 w-6 text-white" />
-                </div>
+                <img 
+                  src="/img/icon.png" 
+                  alt="Hintaro" 
+                  className="h-12 w-auto"
+                />
                 <div>
                   <h2 className="text-xl font-bold font-display text-white">
                     Log in
