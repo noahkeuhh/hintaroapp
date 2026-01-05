@@ -226,28 +226,28 @@ export const AnalysisResults = ({
             <div className="lg:col-span-2 space-y-3 sm:space-y-4">
               {/* Summary cards - 2x2 on mobile, 4 cols on desktop */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
-                <div className="card-elevated p-2.5 sm:p-4">
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Intent</p>
-                  <p className="font-semibold text-xs sm:text-sm text-foreground line-clamp-2">
+                <div className="card-elevated p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Intent</p>
+                  <p className="font-semibold text-sm sm:text-base text-foreground line-clamp-2">
                     {result.intent}
                   </p>
                 </div>
-                <div className="card-elevated p-2.5 sm:p-4">
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Tone</p>
-                  <p className="font-semibold text-xs sm:text-sm text-foreground capitalize">
+                <div className="card-elevated p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Tone</p>
+                  <p className="font-semibold text-sm sm:text-base text-foreground capitalize">
                     {result.tone}
                   </p>
                 </div>
-                <div className="card-elevated p-2.5 sm:p-4">
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Category</p>
-                  <p className="font-semibold text-xs sm:text-sm text-foreground capitalize">
+                <div className="card-elevated p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Category</p>
+                  <p className="font-semibold text-sm sm:text-base text-foreground capitalize">
                     {result.category}
                   </p>
                 </div>
-                <div className="card-elevated p-2.5 sm:p-4">
-                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Risk</p>
+                <div className="card-elevated p-3 sm:p-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Risk</p>
                   <span
-                    className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium ${riskConfig.bg} ${riskConfig.text}`}
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-medium ${riskConfig.bg} ${riskConfig.text}`}
                   >
                     {riskConfig.label}
                   </span>
@@ -255,36 +255,36 @@ export const AnalysisResults = ({
               </div>
 
               {/* Recommended timing - inline on mobile */}
-              <div className="card-elevated p-2.5 sm:p-4">
+              <div className="card-elevated p-3 sm:p-4">
                 <div className="flex items-center gap-2">
-                  <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0" />
-                  <p className="font-medium text-xs sm:text-sm text-foreground">Timing:</p>
-                  <p className="text-xs sm:text-sm text-muted-foreground flex-1">
+                  <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
+                  <p className="font-medium text-sm sm:text-base text-foreground">Timing:</p>
+                  <p className="text-sm sm:text-base text-muted-foreground flex-1">
                     {result.recommended_timing}
                   </p>
                 </div>
               </div>
 
               {/* Suggested replies - compact on mobile */}
-              <div className="card-elevated p-3 sm:p-5">
-                <h3 className="font-bold text-foreground mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-                  <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              <div className="card-elevated p-4 sm:p-5">
+                <h3 className="font-bold text-foreground mb-3 sm:mb-4 flex items-center gap-2 text-base sm:text-lg">
+                  <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   Replies
-                  <span className="text-[10px] sm:text-xs font-normal text-muted-foreground ml-auto">
+                  <span className="text-xs sm:text-sm font-normal text-muted-foreground ml-auto">
                     {suggestionList.length}
                   </span>
                 </h3>
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3 sm:space-y-4">
                   {suggestionList.map((reply, index) => {
                     const Icon = REPLY_ICONS[reply.type.toLowerCase()] || MessageSquare;
                     return (
                       <div
                         key={index}
-                        className="p-2.5 sm:p-4 bg-muted/50 rounded-lg sm:rounded-xl group hover:bg-muted transition-colors"
+                        className="p-3 sm:p-4 bg-muted/50 rounded-lg sm:rounded-xl group hover:bg-muted transition-colors"
                       >
-                        <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                          <span className="text-xs sm:text-sm font-medium text-accent flex items-center gap-1">
-                            <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <span className="text-sm sm:text-base font-medium text-accent flex items-center gap-1.5">
+                            <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                             {reply.type}
                           </span>
                           <div className="flex gap-1 sm:gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
@@ -316,7 +316,7 @@ export const AnalysisResults = ({
                             </button>
                           </div>
                         </div>
-                        <p className="text-foreground text-xs sm:text-sm">{reply.text}</p>
+                        <p className="text-foreground text-sm sm:text-base leading-relaxed">{reply.text}</p>
                       </div>
                     );
                   })}
@@ -439,9 +439,9 @@ export const AnalysisResults = ({
             <div className="space-y-4">
               {/* Handle both string and structured explanations */}
               {typeof explanation === "string" ? (
-                <div className="card-elevated p-6">
-                  <h3 className="font-bold text-foreground mb-4">Analysis Explanation</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                <div className="card-elevated p-4 sm:p-6">
+                  <h3 className="font-bold text-foreground mb-4 text-base sm:text-lg">Analysis Explanation</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                     {explanation}
                   </p>
                 </div>
@@ -449,33 +449,33 @@ export const AnalysisResults = ({
                 // Structured explanation (Deep mode)
                 <div className="space-y-4">
                   {explanation.meaning_breakdown && (
-                    <div className="card-elevated p-6">
-                      <h3 className="font-bold text-foreground mb-3">Meaning Breakdown</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                    <div className="card-elevated p-4 sm:p-6">
+                      <h3 className="font-bold text-foreground mb-3 text-base sm:text-lg">Meaning Breakdown</h3>
+                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                         {explanation.meaning_breakdown}
                       </p>
                     </div>
                   )}
                   {explanation.emotional_context && (
-                    <div className="card-elevated p-6">
-                      <h3 className="font-bold text-foreground mb-3">Emotional Context</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                    <div className="card-elevated p-4 sm:p-6">
+                      <h3 className="font-bold text-foreground mb-3 text-base sm:text-lg">Emotional Context</h3>
+                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                         {explanation.emotional_context}
                       </p>
                     </div>
                   )}
                   {explanation.relationship_signals && (
-                    <div className="card-elevated p-6">
-                      <h3 className="font-bold text-foreground mb-3">Relationship Signals</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                    <div className="card-elevated p-4 sm:p-6">
+                      <h3 className="font-bold text-foreground mb-3 text-base sm:text-lg">Relationship Signals</h3>
+                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                         {explanation.relationship_signals}
                       </p>
                     </div>
                   )}
                   {explanation.hidden_patterns && (
-                    <div className="card-elevated p-6">
-                      <h3 className="font-bold text-foreground mb-3">Hidden Patterns</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                    <div className="card-elevated p-4 sm:p-6">
+                      <h3 className="font-bold text-foreground mb-3 text-base sm:text-lg">Hidden Patterns</h3>
+                      <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                         {explanation.hidden_patterns}
                       </p>
                     </div>
@@ -536,12 +536,12 @@ export const AnalysisResults = ({
 
             {/* Escalation advice */}
             {result.escalation_advice && (
-              <div className="card-elevated p-6">
-                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2">
+              <div className="card-elevated p-4 sm:p-6">
+                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2 text-base sm:text-lg">
                   <TrendingUp className="h-5 w-5 text-accent" />
                   Escalation Advice
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                   {result.escalation_advice}
                 </p>
               </div>
@@ -549,12 +549,12 @@ export const AnalysisResults = ({
 
             {/* Risk mitigation */}
             {result.risk_mitigation && (
-              <div className="card-elevated p-6 border-warning/20">
-                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2">
+              <div className="card-elevated p-4 sm:p-6 border-warning/20">
+                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2 text-base sm:text-lg">
                   <AlertTriangle className="h-5 w-5 text-warning" />
                   Risk Mitigation
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                   {result.risk_mitigation}
                 </p>
               </div>
