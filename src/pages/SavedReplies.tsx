@@ -9,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { formatDistanceToNow } from "date-fns";
-import { nl } from "date-fns/locale";
 import {
   Search,
   Bookmark,
@@ -44,13 +43,13 @@ const SavedRepliesContent = () => {
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
     toast({
-      title: "Gekopieerd!",
-      description: "Antwoord gekopieerd naar klembord",
+      title: "Copied!",
+      description: "Reply copied to clipboard",
     });
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Weet je zeker dat je dit antwoord wilt verwijderen?")) {
+    if (!confirm("Are you sure you want to delete this reply?")) {
       return;
     }
 
@@ -58,13 +57,13 @@ const SavedRepliesContent = () => {
       await api.deleteSavedReply(id);
       queryClient.invalidateQueries({ queryKey: ["savedReplies"] });
       toast({
-        title: "Verwijderd",
-        description: "Antwoord is verwijderd",
+        title: "Deleted",
+        description: "Reply has been deleted",
       });
     } catch (error: any) {
       toast({
-        title: "Fout",
-        description: error.message || "Kon antwoord niet verwijderen",
+        title: "Error",
+        description: error.message || "Could not delete reply",
         variant: "destructive",
       });
     }
@@ -98,13 +97,13 @@ const SavedRepliesContent = () => {
             {/* Header */}
             <div className="flex flex-col gap-3 mb-4 sm:mb-6">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Opgeslagen</h1>
-                <p className="text-sm text-muted-foreground">Je favoriete replies</p>
+                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Saved Replies</h1>
+                <p className="text-sm text-muted-foreground">Your favorite replies</p>
               </div>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Zoeken..."
+                  placeholder="Search..."
                   className="pl-10 w-full sm:w-64"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -116,11 +115,11 @@ const SavedRepliesContent = () => {
             {isLoading ? (
               <div className="card-elevated p-12 text-center">
                 <Loader2 className="h-8 w-8 animate-spin text-accent mx-auto mb-4" />
-                <p className="text-muted-foreground">Opgeslagen antwoorden laden...</p>
+                <p className="text-muted-foreground">Loading saved replies...</p>
               </div>
             ) : error ? (
               <div className="card-elevated p-12 text-center">
-                <p className="text-destructive">Fout bij laden van opgeslagen antwoorden</p>
+                <p className="text-destructive">Error loading saved replies</p>
               </div>
             ) : filteredReplies.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
@@ -134,10 +133,10 @@ const SavedRepliesContent = () => {
                   >
                     <div className="flex items-center justify-between mb-2 sm:mb-3">
                       <span className="text-xs sm:text-sm font-medium text-accent">
-                        {reply.reply_type || "Algemeen"}
+                        {reply.reply_type || "General"}
                       </span>
                       <span className="text-[10px] sm:text-xs text-muted-foreground">
-                        {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true, locale: nl })}
+                        {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true })}
                       </span>
                     </div>
                     
@@ -161,14 +160,13 @@ const SavedRepliesContent = () => {
                         {copiedId === reply.id ? (
                           <>
                             <Check className="h-3 w-3 sm:h-4 sm:w-4 text-success mr-1 sm:mr-2" />
-                            <span className="hidden sm:inline">Gekopieerd</span>
+                            <span className="hidden sm:inline">Copied</span>
                             <span className="sm:hidden">OK</span>
                           </>
                         ) : (
                           <>
                             <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                            <span className="hidden sm:inline">Kopieer</span>
-                            <span className="sm:hidden">Copy</span>
+                            <span>Copy</span>
                           </>
                         )}
                       </Button>
@@ -180,12 +178,12 @@ const SavedRepliesContent = () => {
               <div className="card-elevated p-12 text-center">
                 <Bookmark className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-foreground mb-2">
-                  {searchQuery ? "Geen resultaten gevonden" : "Nog geen opgeslagen antwoorden"}
+                  {searchQuery ? "No results found" : "No saved replies yet"}
                 </h3>
                 <p className="text-muted-foreground">
                   {searchQuery
-                    ? "Probeer een andere zoekterm."
-                    : "Klik op de ster bij een antwoord om hem hier op te slaan."}
+                    ? "Try a different search term."
+                    : "Click the star on a reply to save it here."}
                 </p>
               </div>
             )}

@@ -187,7 +187,7 @@ export const AnalysisDetailModal = ({ isOpen, onClose, analysisId, onAnalysisIdC
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onMouseDown={(e) => {
             // Only close if clicking on the backdrop itself, not on modal content
             if (e.target === e.currentTarget) {
@@ -200,7 +200,7 @@ export const AnalysisDetailModal = ({ isOpen, onClose, analysisId, onAnalysisIdC
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="bg-card rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+            className="bg-background rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col border border-border"
           >
             {/* Header */}
             <div className="relative bg-gradient-hero p-6 flex-shrink-0">
@@ -217,7 +217,7 @@ export const AnalysisDetailModal = ({ isOpen, onClose, analysisId, onAnalysisIdC
 
             {/* Content */}
             <div 
-              className="flex-1 overflow-y-auto p-6"
+              className="flex-1 overflow-y-auto p-4 sm:p-6 bg-background text-foreground"
               onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => e.stopPropagation()}
             >

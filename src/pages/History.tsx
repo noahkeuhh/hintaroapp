@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { formatDistanceToNow } from "date-fns";
-import { nl } from "date-fns/locale";
 import {
   Select,
   SelectContent,
@@ -86,9 +85,9 @@ const HistoryContent = () => {
 
   const getRiskBadge = (risk: string) => {
     const badges: Record<string, { label: string; color: string }> = {
-      low: { label: "Laag risico", color: "bg-success/10 text-success" },
-      medium: { label: "Medium risico", color: "bg-warning/10 text-warning" },
-      high: { label: "Hoog risico", color: "bg-destructive/10 text-destructive" },
+      low: { label: "Low risk", color: "bg-success/10 text-success" },
+      medium: { label: "Medium risk", color: "bg-warning/10 text-warning" },
+      high: { label: "High risk", color: "bg-destructive/10 text-destructive" },
     };
     return badges[risk] || badges.low;
   };
@@ -160,14 +159,14 @@ const HistoryContent = () => {
             {/* Header */}
             <div className="flex flex-col gap-3 mb-4 sm:mb-6">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Geschiedenis</h1>
-                <p className="text-sm text-muted-foreground">Bekijk al je eerdere analyses</p>
+                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">History</h1>
+                <p className="text-sm text-muted-foreground">View all your previous analyses</p>
               </div>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
                 <div className="relative flex-1 sm:flex-initial">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Zoeken..."
+                    placeholder="Search..."
                     className="pl-10 w-full sm:w-64"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -179,10 +178,10 @@ const HistoryContent = () => {
                     <SelectValue placeholder="Filter" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Alle</SelectItem>
-                    <SelectItem value="done">Voltooid</SelectItem>
-                    <SelectItem value="processing">Verwerken</SelectItem>
-                    <SelectItem value="failed">Mislukt</SelectItem>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="done">Completed</SelectItem>
+                    <SelectItem value="processing">Processing</SelectItem>
+                    <SelectItem value="failed">Failed</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -192,11 +191,11 @@ const HistoryContent = () => {
             {isLoading ? (
               <div className="card-elevated p-12 text-center">
                 <Loader2 className="h-8 w-8 animate-spin text-accent mx-auto mb-4" />
-                <p className="text-muted-foreground">Geschiedenis laden...</p>
+                <p className="text-muted-foreground">Loading history...</p>
               </div>
             ) : error ? (
               <div className="card-elevated p-12 text-center">
-                <p className="text-destructive">Fout bij laden van geschiedenis</p>
+                <p className="text-destructive">Error loading history</p>
               </div>
             ) : filteredHistory.length > 0 ? (
               <div className="space-y-2 sm:space-y-3">
@@ -251,7 +250,7 @@ const HistoryContent = () => {
                           <div className="flex items-center gap-2 sm:gap-3 mt-1.5 sm:mt-2 flex-wrap">
                             <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
-                              {formatDistanceToNow(new Date(item.created_at), { addSuffix: true, locale: nl })}
+                              {formatDistanceToNow(new Date(item.created_at), { addSuffix: true })}
                             </span>
                             <span className="text-[10px] sm:text-xs text-muted-foreground">
                               {item.credits_used} cr
@@ -278,12 +277,12 @@ const HistoryContent = () => {
               <div className="card-elevated p-12 text-center">
                 <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-foreground mb-2">
-                  Geen analyses gevonden
+                  No analyses found
                 </h3>
                 <p className="text-muted-foreground">
                   {searchQuery || filterStatus !== "all" 
-                    ? "Probeer een andere zoekterm of filter."
-                    : "Je hebt nog geen analyses uitgevoerd. Start je eerste analyse!"}
+                    ? "Try a different search term or filter."
+                    : "You haven't run any analyses yet. Start your first analysis!"}
                 </p>
               </div>
             )}
