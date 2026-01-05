@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, MessageCircle, Send, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Mail, Send, MapPin, Phone, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -51,14 +51,11 @@ const Contact = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-6">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg, hsl(180 85% 65%), hsl(248 73% 70%))",
-                }}
-              >
-                <MessageCircle className="h-6 w-6 text-white" />
-              </div>
+              <img 
+                src="/img/icon.png" 
+                alt="Hintaro" 
+                className="h-12 w-auto"
+              />
             </div>
             <h1
               className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"

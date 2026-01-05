@@ -16,7 +16,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
-  MessageCircle,
 } from "lucide-react";
 
 const navItems = [
@@ -79,22 +78,11 @@ export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
       {/* Logo */}
       <div className="h-[62px] px-4 flex items-center border-b border-sidebar-border">
         <Link to="/dashboard" className="flex items-center gap-3">
-          <div className="relative">
-            <MessageCircle className="h-7 w-7" style={{ color: "hsl(180 85% 65%)" }} />
-            <motion.div
-              className="absolute inset-0 blur-lg"
-              style={{ background: "linear-gradient(135deg, hsl(180 85% 65%) 0%, hsl(248 73% 70%) 100%)", opacity: 0.3 }}
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
+          <img 
+            src="/img/icon.png" 
+            alt="Hintaro" 
+            className="h-8 w-auto"
+          />
           {!isCollapsed && (
             <span 
               className="font-bold font-display text-lg"

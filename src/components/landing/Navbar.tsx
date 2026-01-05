@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -60,15 +60,12 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
       >
         <div className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-105" style={{ background: "linear-gradient(135deg, hsl(180 85% 65%) 0%, hsl(248 73% 70%) 100%)" }}>
-              <MessageCircle className="h-5 w-5 text-white" />
-            </div>
-            <span className={`text-xl font-bold font-display transition-colors ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}>
-              Hintaro
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src="/img/logo (2).png" 
+              alt="Hintaro" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}

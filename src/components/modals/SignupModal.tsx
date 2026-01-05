@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { X, MessageCircle, Mail, Lock, Tag, Loader2 } from "lucide-react";
+import { X, Mail, Lock, Tag, Loader2, Sparkles } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 interface SignupModalProps {
@@ -135,9 +135,11 @@ export const SignupModal = ({ isOpen, onClose, onSuccess, onSwitchToLogin }: Sig
                 <X className="h-5 w-5" />
               </button>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent flex items-center justify-center">
-                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                </div>
+                <img 
+                  src="/img/icon.png" 
+                  alt="Hintaro" 
+                  className="h-10 sm:h-12 w-auto"
+                />
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold font-display text-white">
                     Create Account
@@ -219,7 +221,7 @@ export const SignupModal = ({ isOpen, onClose, onSuccess, onSwitchToLogin }: Sig
                   </>
                 ) : (
                   <>
-                    <MessageCircle className="h-4 w-4" />
+                    <Sparkles className="h-4 w-4" />
                     Create Account
                   </>
                 )}

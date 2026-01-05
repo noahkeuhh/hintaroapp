@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
 
 export const Footer = () => {
   const links = [
@@ -13,8 +12,12 @@ export const Footer = () => {
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <MessageCircle className="w-6 h-6" style={{ color: "#5CE1E6" }} />
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/img/icon.png" 
+              alt="Hintaro" 
+              className="h-8 w-auto"
+            />
             <span 
               className="text-lg font-bold"
               style={{ 

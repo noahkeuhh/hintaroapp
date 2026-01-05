@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { MessageCircle, Mail, Twitter, Instagram, Linkedin, Loader2, ArrowRight, Shield } from "lucide-react";
+import { Mail, Twitter, Instagram, Linkedin, Loader2, ArrowRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -48,9 +48,11 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: "linear-gradient(135deg, hsl(180 85% 65%) 0%, hsl(248 73% 70%) 100%)" }}>
-                <MessageCircle className="h-6 w-6 text-white" />
-              </div>
+              <img 
+                src="/img/icon.png" 
+                alt="Hintaro" 
+                className="h-12 w-auto"
+              />
               <span className="text-2xl font-bold font-display">Hintaro</span>
             </div>
             <p className="text-white/60 mb-8 max-w-sm leading-relaxed text-lg">

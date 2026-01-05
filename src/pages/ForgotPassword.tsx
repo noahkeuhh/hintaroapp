@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, ArrowLeft, MessageCircle, Loader2, CheckCircle } from "lucide-react";
+import { Mail, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -64,9 +64,11 @@ const ForgotPassword = () => {
       >
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 mb-8 justify-center">
-          <div className="w-10 h-10 rounded-xl bg-gradient-accent flex items-center justify-center">
-            <MessageCircle className="h-6 w-6 text-white" />
-          </div>
+          <img 
+            src="/img/icon.png" 
+            alt="Hintaro" 
+            className="h-10 w-auto"
+          />
           <span className="text-2xl font-display font-bold text-white">
             Hintaro
           </span>

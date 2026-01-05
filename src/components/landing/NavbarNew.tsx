@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -62,36 +62,12 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
       >
         <div className="container flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <MessageCircle 
-                className="w-7 h-7" 
-                style={{ color: "#5CE1E6" }}
-              />
-              <motion.div
-                className="absolute inset-0 blur-lg"
-                style={{ background: "linear-gradient(135deg, #5CE1E6 0%, #7A7CFF 100%)", opacity: 0.3 }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </div>
-            <span 
-              className="text-xl font-bold"
-              style={{ 
-                background: "linear-gradient(135deg, #5CE1E6 0%, #7A7CFF 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
-              }}
-            >
-              Hintaro
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src="/img/logo (2).png" 
+              alt="Hintaro" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}
