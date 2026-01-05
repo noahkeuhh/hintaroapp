@@ -28,7 +28,11 @@ const navItems = [
   { icon: Settings, label: "Settings", href: "/dashboard/settings" },
 ];
 
-export const DashboardSidebar = () => {
+interface DashboardSidebarProps {
+  onNavigate?: () => void;
+}
+
+export const DashboardSidebar = ({ onNavigate }: DashboardSidebarProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
@@ -131,6 +135,7 @@ export const DashboardSidebar = () => {
             <Link
               key={item.href}
               to={item.href}
+              onClick={() => onNavigate?.()}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
                 isActive
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"

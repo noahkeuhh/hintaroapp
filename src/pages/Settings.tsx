@@ -39,6 +39,7 @@ const SettingsContent = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [profileData, setProfileData] = useState({
     email: "",
     name: "",
@@ -142,10 +143,23 @@ const SettingsContent = () => {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <DashboardSidebar />
+      {/* Mobile Sidebar Overlay */}
+      {isMobileSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+      
+      {/* Sidebar - hidden on mobile, shown when toggle is clicked */}
+      <div className={`fixed lg:static inset-y-0 left-0 z-50 lg:z-0 transform transition-transform duration-300 lg:transform-none ${
+        isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      } lg:block`}>
+        <DashboardSidebar onNavigate={() => setIsMobileSidebarOpen(false)} />
+      </div>
       
       <div className="flex-1 flex flex-col min-w-0">
-        <DashboardHeader />
+        <DashboardHeader onMenuClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
         
         <main className="flex-1 p-3 sm:p-6">
           <motion.div

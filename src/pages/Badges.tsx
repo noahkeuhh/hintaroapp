@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -11,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BadgeCard from "@/components/BadgeCard";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 
 interface Badge {
   id: string;
@@ -24,6 +27,7 @@ interface Badge {
 
 const BadgesContent = () => {
   const { user } = useAuth();
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   
   const { data, isLoading, error } = useQuery({
     queryKey: ["badges"],
@@ -83,10 +87,30 @@ const BadgesContent = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-muted-foreground">Badges laden...</p>
+      <div className="flex min-h-screen bg-background">
+        {/* Mobile Sidebar Overlay */}
+        {isMobileSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+        )}
+        
+        {/* Sidebar */}
+        <div className={`fixed lg:static inset-y-0 left-0 z-50 lg:z-0 transform transition-transform duration-300 lg:transform-none ${
+          isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        } lg:block`}>
+          <DashboardSidebar onNavigate={() => setIsMobileSidebarOpen(false)} />
+        </div>
+        
+        <div className="flex-1 flex flex-col min-w-0">
+          <DashboardHeader onMenuClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-muted-foreground">Badges laden...</p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -95,32 +119,69 @@ const BadgesContent = () => {
   if (error) {
     console.error('Badge error details:', error);
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center max-w-md">
-          <Trophy className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="font-bold text-foreground mb-2">Kan badges niet laden</h3>
-          <p className="text-muted-foreground mb-4">
-            Er is een probleem bij het ophalen van badges.
-          </p>
-          <p className="text-sm text-muted-foreground/70 font-mono">
-            {error?.message || 'Onbekende fout'}
-          </p>
-          <Button
-            variant="outline"
-            className="mt-4"
-            onClick={() => window.location.reload()}
-          >
-            Probeer opnieuw
-          </Button>
+      <div className="flex min-h-screen bg-background">
+        {/* Mobile Sidebar Overlay */}
+        {isMobileSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+        )}
+        
+        {/* Sidebar */}
+        <div className={`fixed lg:static inset-y-0 left-0 z-50 lg:z-0 transform transition-transform duration-300 lg:transform-none ${
+          isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        } lg:block`}>
+          <DashboardSidebar onNavigate={() => setIsMobileSidebarOpen(false)} />
+        </div>
+        
+        <div className="flex-1 flex flex-col min-w-0">
+          <DashboardHeader onMenuClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center max-w-md">
+              <Trophy className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="font-bold text-foreground mb-2">Kan badges niet laden</h3>
+              <p className="text-muted-foreground mb-4">
+                Er is een probleem bij het ophalen van badges.
+              </p>
+              <p className="text-sm text-muted-foreground/70 font-mono">
+                {error?.message || 'Onbekende fout'}
+              </p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => window.location.reload()}
+              >
+                Probeer opnieuw
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
-        <main className="mx-auto max-w-5xl">
+    <div className="flex min-h-screen bg-background">
+      {/* Mobile Sidebar Overlay */}
+      {isMobileSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div className={`fixed lg:static inset-y-0 left-0 z-50 lg:z-0 transform transition-transform duration-300 lg:transform-none ${
+        isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      } lg:block`}>
+        <DashboardSidebar onNavigate={() => setIsMobileSidebarOpen(false)} />
+      </div>
+      
+      <div className="flex-1 flex flex-col min-w-0">
+        <DashboardHeader onMenuClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
+        
+        <main className="flex-1 p-3 sm:p-6">
           <AnimatePresence>
             {user ? (
               <motion.div
