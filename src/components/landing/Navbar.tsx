@@ -64,7 +64,7 @@ export const Navbar = ({ onSignupClick, onLoginClick }: NavbarProps) => {
             <img 
               src="/img/logo (2).png" 
               alt="Hintaro" 
-              className="h-28 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
 
