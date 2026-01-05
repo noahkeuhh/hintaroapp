@@ -119,7 +119,7 @@ const BadgesContent = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         <main className="mx-auto max-w-5xl">
           <AnimatePresence>
             {user ? (
@@ -127,62 +127,68 @@ const BadgesContent = () => {
                 key="badges-page"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
+                className="space-y-4 sm:space-y-8"
               >
                 {/* Header */}
                 <div>
-                  <h1 className="text-2xl font-bold font-display text-foreground">Badges</h1>
-                  <p className="text-muted-foreground">Verdien badges door analyses te voltooien</p>
+                  <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Badges</h1>
+                  <p className="text-sm text-muted-foreground">Verdien badges door analyses te voltooien</p>
                 </div>
 
                 {/* Progress Summary */}
-                <div className="card-elevated p-6">
+                <div className="card-elevated p-4 sm:p-6">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
-                        <Trophy className="h-8 w-8 text-white" />
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
+                        <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-bold font-display text-foreground">
+                        <h2 className="text-xl sm:text-2xl font-bold font-display text-foreground">
                           {unlocked.length} / {allBadges.length}
                         </h2>
-                        <p className="text-sm text-muted-foreground">Badges ontgrendeld</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Badges ontgrendeld</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-accent">
+                      <div className="text-2xl sm:text-3xl font-bold text-accent">
                         {allBadges.length > 0 ? Math.round((unlocked.length / allBadges.length) * 100) : 0}%
                       </div>
-                      <p className="text-xs text-muted-foreground">Voltooid</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">Voltooid</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Tabs */}
                 <Tabs defaultValue="all" className="w-full">
-                  <TabsList className="grid w-full grid-cols-3 mb-6">
-                    <TabsTrigger value="all">
-                      Alle badges ({allBadges.length})
+                  <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-6 h-auto p-1">
+                    <TabsTrigger value="all" className="text-xs sm:text-sm py-1.5 sm:py-2 px-1 sm:px-3">
+                      <span className="hidden sm:inline">Alle badges</span>
+                      <span className="sm:hidden">Alle</span>
+                      <span className="ml-1">({allBadges.length})</span>
                     </TabsTrigger>
-                    <TabsTrigger value="unlocked">
-                      Ontgrendeld ({unlocked.length})
+                    <TabsTrigger value="unlocked" className="text-xs sm:text-sm py-1.5 sm:py-2 px-1 sm:px-3">
+                      <span className="hidden sm:inline">Ontgrendeld</span>
+                      <span className="sm:hidden">Open</span>
+                      <span className="ml-1">({unlocked.length})</span>
                     </TabsTrigger>
-                    <TabsTrigger value="locked">
-                      Vergrendeld ({locked.length})
+                    <TabsTrigger value="locked" className="text-xs sm:text-sm py-1.5 sm:py-2 px-1 sm:px-3">
+                      <span className="hidden sm:inline">Vergrendeld</span>
+                      <span className="sm:hidden">Locked</span>
+                      <span className="ml-1">({locked.length})</span>
                     </TabsTrigger>
                   </TabsList>
 
                   {/* All Badges Tab */}
-                  <TabsContent value="all" className="space-y-8">
+                  <TabsContent value="all" className="space-y-6 sm:space-y-8">
                     {Object.entries(groupedAll).map(([category, badges]) => {
                       const CategoryIcon = getCategoryIcon(category);
                       return (
                         <div key={category}>
-                          <h2 className="text-lg font-bold font-display text-foreground mb-4 flex items-center gap-2">
-                            <CategoryIcon className="h-5 w-5 text-accent" />
+                          <h2 className="text-base sm:text-lg font-bold font-display text-foreground mb-3 sm:mb-4 flex items-center gap-2">
+                            <CategoryIcon className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                             {getCategoryName(category)}
                           </h2>
-                          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
                             {badges.map((badge) => {
                               const isUnlocked = unlocked.some((u) => u.id === badge.id);
                               const unlockedBadge = unlocked.find((u) => u.id === badge.id);
@@ -203,15 +209,15 @@ const BadgesContent = () => {
                   </TabsContent>
 
                   {/* Unlocked Badges Tab */}
-                  <TabsContent value="unlocked" className="space-y-8">
+                  <TabsContent value="unlocked" className="space-y-6 sm:space-y-8">
                     {Object.keys(groupedUnlocked).length === 0 ? (
-                      <div className="card-elevated p-12 text-center">
-                        <Lock className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                        <h3 className="font-bold text-foreground mb-2">Nog geen badges ontgrendeld</h3>
-                        <p className="text-muted-foreground mb-6">
+                      <div className="card-elevated p-8 sm:p-12 text-center">
+                        <Lock className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-3 sm:mb-4" />
+                        <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Nog geen badges ontgrendeld</h3>
+                        <p className="text-muted-foreground mb-4 sm:mb-6 text-xs sm:text-sm">
                           Voltooi je eerste analyse om je eerste badge te verdienen!
                         </p>
-                        <Button asChild>
+                        <Button asChild size="sm">
                           <a href="/dashboard">
                             <Sparkles className="h-4 w-4 mr-2" />
                             Start analyse
@@ -223,11 +229,11 @@ const BadgesContent = () => {
                         const CategoryIcon = getCategoryIcon(category);
                         return (
                           <div key={category}>
-                            <h2 className="text-lg font-bold font-display text-foreground mb-4 flex items-center gap-2">
-                              <CategoryIcon className="h-5 w-5 text-accent" />
+                            <h2 className="text-base sm:text-lg font-bold font-display text-foreground mb-3 sm:mb-4 flex items-center gap-2">
+                              <CategoryIcon className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                               {getCategoryName(category)}
                             </h2>
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
                               {badges.map((badge) => {
                                 const unlockedBadge = badge as Badge & { unlocked_at: string };
                                 return (
@@ -248,12 +254,12 @@ const BadgesContent = () => {
                   </TabsContent>
 
                   {/* Locked Badges Tab */}
-                  <TabsContent value="locked" className="space-y-8">
+                  <TabsContent value="locked" className="space-y-6 sm:space-y-8">
                     {Object.keys(groupedLocked).length === 0 ? (
-                      <div className="card-elevated p-12 text-center">
-                        <Trophy className="h-12 w-12 text-accent mx-auto mb-4" />
-                        <h3 className="font-bold text-foreground mb-2">Alle badges ontgrendeld! 🎉</h3>
-                        <p className="text-muted-foreground">
+                      <div className="card-elevated p-8 sm:p-12 text-center">
+                        <Trophy className="h-10 w-10 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
+                        <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Alle badges ontgrendeld! 🎉</h3>
+                        <p className="text-muted-foreground text-xs sm:text-sm">
                           Geweldig werk! Je hebt alle beschikbare badges verdiend.
                         </p>
                       </div>
@@ -262,11 +268,11 @@ const BadgesContent = () => {
                         const CategoryIcon = getCategoryIcon(category);
                         return (
                           <div key={category}>
-                            <h2 className="text-lg font-bold font-display text-foreground mb-4 flex items-center gap-2">
-                              <CategoryIcon className="h-5 w-5 text-muted-foreground" />
+                            <h2 className="text-base sm:text-lg font-bold font-display text-foreground mb-3 sm:mb-4 flex items-center gap-2">
+                              <CategoryIcon className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
                               {getCategoryName(category)}
                             </h2>
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
                               {badges.map((badge) => (
                                 <BadgeCard
                                   key={badge.id}

@@ -152,116 +152,145 @@ export const AnalysisResults = ({
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      {/* Header with credits only */}
-      <div className="card-elevated p-4 bg-gradient-to-r from-primary/5 to-accent/5">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-xs text-muted-foreground mb-1">Credits Spent</p>
-            <p className="font-medium text-sm text-foreground">-{creditsSpent}</p>
+      {/* Header with credits only - compact on mobile */}
+      <div className="card-elevated p-3 sm:p-4 bg-gradient-to-r from-primary/5 to-accent/5">
+        <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-muted-foreground">Spent:</span>
+            <span className="font-medium text-sm text-foreground">-{creditsSpent}</span>
           </div>
-          <div>
-            <p className="text-xs text-muted-foreground mb-1">Credits Remaining</p>
-            <p className="font-medium text-sm text-foreground">{creditsRemaining}</p>
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-muted-foreground">Remaining:</span>
+            <span className="font-medium text-sm text-foreground">{creditsRemaining}</span>
           </div>
         </div>
       </div>
 
       {/* Result Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="w-full justify-start bg-muted/50 p-1">
-          <TabsTrigger value="overview" className="gap-2">
-            <Layers className="h-4 w-4" />
-            Overview
+        <TabsList className="w-full justify-start bg-muted/50 p-1 overflow-x-auto">
+          <TabsTrigger value="overview" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3">
+            <Layers className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden xs:inline">Overview</span>
+            <span className="xs:hidden">Info</span>
           </TabsTrigger>
           <TabsTrigger
             value="explanation"
-            className="gap-2"
+            className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3"
             disabled={!explanation}
           >
-            <Lightbulb className="h-4 w-4" />
-            Explanation
+            <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden xs:inline">Explanation</span>
+            <span className="xs:hidden">Why</span>
             {!explanation && <Lock className="h-3 w-3 ml-1" />}
           </TabsTrigger>
           {analysisMode === "deep" && (
-            <TabsTrigger value="deep" className="gap-2">
-              <BookOpen className="h-4 w-4" />
-              Deep Analysis
+            <TabsTrigger value="deep" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3">
+              <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden xs:inline">Deep Analysis</span>
+              <span className="xs:hidden">Deep</span>
             </TabsTrigger>
           )}
         </TabsList>
 
         {/* Overview Tab */}
-        <TabsContent value="overview" className="mt-6 space-y-6">
-          <div className="grid lg:grid-cols-3 gap-6">
+        <TabsContent value="overview" className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+          {/* Interest level - show first on mobile */}
+          <div className="lg:hidden">
+            {interestLevel > 0 && (
+              <div className="card-elevated p-3 sm:p-4">
+                <div className="flex items-center gap-3">
+                  <p className="text-xs text-muted-foreground font-medium whitespace-nowrap">Interest</p>
+                  <div className="flex-1">
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          interestLevel < 40
+                            ? "bg-destructive"
+                            : interestLevel < 70
+                            ? "bg-warning"
+                            : "bg-success"
+                        }`}
+                        style={{ width: `${interestLevel}%` }}
+                      />
+                    </div>
+                  </div>
+                  <span className="text-lg font-bold text-foreground">{interestLevel}%</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Main results */}
-            <div className="lg:col-span-2 space-y-4">
-              {/* Summary cards */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <div className="card-elevated p-4">
-                  <p className="text-xs text-muted-foreground mb-1">Intent</p>
-                  <p className="font-semibold text-sm text-foreground">
+            <div className="lg:col-span-2 space-y-3 sm:space-y-4">
+              {/* Summary cards - 2x2 on mobile, 4 cols on desktop */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                <div className="card-elevated p-2.5 sm:p-4">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Intent</p>
+                  <p className="font-semibold text-xs sm:text-sm text-foreground line-clamp-2">
                     {result.intent}
                   </p>
                 </div>
-                <div className="card-elevated p-4">
-                  <p className="text-xs text-muted-foreground mb-1">Tone</p>
-                  <p className="font-semibold text-sm text-foreground capitalize">
+                <div className="card-elevated p-2.5 sm:p-4">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Tone</p>
+                  <p className="font-semibold text-xs sm:text-sm text-foreground capitalize">
                     {result.tone}
                   </p>
                 </div>
-                <div className="card-elevated p-4">
-                  <p className="text-xs text-muted-foreground mb-1">Category</p>
-                  <p className="font-semibold text-sm text-foreground capitalize">
+                <div className="card-elevated p-2.5 sm:p-4">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Category</p>
+                  <p className="font-semibold text-xs sm:text-sm text-foreground capitalize">
                     {result.category}
                   </p>
                 </div>
-                <div className="card-elevated p-4">
-                  <p className="text-xs text-muted-foreground mb-1">Emotional Risk</p>
+                <div className="card-elevated p-2.5 sm:p-4">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">Risk</p>
                   <span
-                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${riskConfig.bg} ${riskConfig.text}`}
+                    className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium ${riskConfig.bg} ${riskConfig.text}`}
                   >
                     {riskConfig.label}
                   </span>
                 </div>
               </div>
 
-              {/* Recommended timing */}
-              <div className="card-elevated p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Clock className="h-4 w-4 text-muted-foreground" />
-                  <p className="font-medium text-foreground">Recommended Timing</p>
+              {/* Recommended timing - inline on mobile */}
+              <div className="card-elevated p-2.5 sm:p-4">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground flex-shrink-0" />
+                  <p className="font-medium text-xs sm:text-sm text-foreground">Timing:</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground flex-1">
+                    {result.recommended_timing}
+                  </p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {result.recommended_timing}
-                </p>
               </div>
 
-              {/* Suggested replies */}
-              <div className="card-elevated p-5">
-                <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-accent" />
-                  Recommended Replies
-                  <span className="text-xs font-normal text-muted-foreground ml-auto">
-                    {suggestionList.length} option{suggestionList.length !== 1 ? "s" : ""}
+              {/* Suggested replies - compact on mobile */}
+              <div className="card-elevated p-3 sm:p-5">
+                <h3 className="font-bold text-foreground mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                  <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+                  Replies
+                  <span className="text-[10px] sm:text-xs font-normal text-muted-foreground ml-auto">
+                    {suggestionList.length}
                   </span>
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {suggestionList.map((reply, index) => {
                     const Icon = REPLY_ICONS[reply.type.toLowerCase()] || MessageSquare;
                     return (
                       <div
                         key={index}
-                        className="p-4 bg-muted/50 rounded-xl group hover:bg-muted transition-colors"
+                        className="p-2.5 sm:p-4 bg-muted/50 rounded-lg sm:rounded-xl group hover:bg-muted transition-colors"
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-accent flex items-center gap-1.5">
-                            <Icon className="h-4 w-4" />
+                        <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                          <span className="text-xs sm:text-sm font-medium text-accent flex items-center gap-1">
+                            <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
                             {reply.type}
                           </span>
-                          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex gap-1 sm:gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={() => handleSave(index)}
-                              className={`p-1.5 rounded-lg transition-colors ${
+                              className={`p-1 sm:p-1.5 rounded-lg transition-colors ${
                                 savedIndices.includes(index)
                                   ? "bg-accent/10 text-accent border border-accent/30"
                                   : "hover:bg-background text-muted-foreground"
@@ -269,25 +298,25 @@ export const AnalysisResults = ({
                               aria-label="Save reply"
                             >
                               <Star
-                                className={`h-4 w-4 ${
+                                className={`h-3 w-3 sm:h-4 sm:w-4 ${
                                   savedIndices.includes(index) ? "fill-current" : ""
                                 }`}
                               />
                             </button>
                             <button
                               onClick={() => handleCopy(reply.text, index)}
-                              className="p-1.5 rounded-lg hover:bg-background text-muted-foreground transition-colors"
+                              className="p-1 sm:p-1.5 rounded-lg hover:bg-background text-muted-foreground transition-colors"
                               aria-label="Copy reply"
                             >
                               {copiedIndex === index ? (
-                                <Check className="h-4 w-4 text-success" />
+                                <Check className="h-3 w-3 sm:h-4 sm:w-4 text-success" />
                               ) : (
-                                <Copy className="h-4 w-4" />
+                                <Copy className="h-3 w-3 sm:h-4 sm:w-4" />
                               )}
                             </button>
                           </div>
                         </div>
-                        <p className="text-foreground text-sm">{reply.text}</p>
+                        <p className="text-foreground text-xs sm:text-sm">{reply.text}</p>
                       </div>
                     );
                   })}
@@ -295,8 +324,8 @@ export const AnalysisResults = ({
               </div>
             </div>
 
-            {/* Right sidebar: Interest level and info */}
-            <div className="space-y-4">
+            {/* Right sidebar: Interest level and info - hidden on mobile (shown above) */}
+            <div className="hidden lg:block space-y-4">
               {/* Interest level with colored bar */}
               {interestLevel > 0 && (
                 <div className="card-elevated p-5">

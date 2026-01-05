@@ -73,25 +73,25 @@ const SavedRepliesContent = () => {
     <div className="flex min-h-screen bg-background">
       <DashboardSidebar />
       
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <DashboardHeader />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex flex-col gap-3 mb-4 sm:mb-6">
               <div>
-                <h1 className="text-2xl font-bold font-display text-foreground">Opgeslagen antwoorden</h1>
-                <p className="text-muted-foreground">Je favoriete replies voor later gebruik</p>
+                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Opgeslagen</h1>
+                <p className="text-sm text-muted-foreground">Je favoriete replies</p>
               </div>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Zoeken..."
-                  className="pl-10 w-64"
+                  className="pl-10 w-full sm:w-64"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -109,51 +109,52 @@ const SavedRepliesContent = () => {
                 <p className="text-destructive">Fout bij laden van opgeslagen antwoorden</p>
               </div>
             ) : filteredReplies.length > 0 ? (
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                 {filteredReplies.map((reply, index) => (
                   <motion.div
                     key={reply.id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="card-elevated p-5 group"
+                    className="card-elevated p-3 sm:p-5 group"
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-medium text-accent">
+                    <div className="flex items-center justify-between mb-2 sm:mb-3">
+                      <span className="text-xs sm:text-sm font-medium text-accent">
                         {reply.reply_type || "Algemeen"}
                       </span>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-[10px] sm:text-xs text-muted-foreground">
                         {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true, locale: nl })}
                       </span>
                     </div>
                     
-                    <p className="text-foreground mb-4 leading-relaxed">{reply.reply_text}</p>
+                    <p className="text-sm sm:text-base text-foreground mb-3 sm:mb-4 leading-relaxed line-clamp-3">{reply.reply_text}</p>
                     
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-muted-foreground hover:text-destructive"
-                          onClick={() => handleDelete(reply.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-muted-foreground hover:text-destructive h-8 px-2"
+                        onClick={() => handleDelete(reply.id)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                       <Button
                         variant="outline"
                         size="sm"
+                        className="h-8 text-xs sm:text-sm"
                         onClick={() => handleCopy(reply.id, reply.reply_text)}
                       >
                         {copiedId === reply.id ? (
                           <>
-                            <Check className="h-4 w-4 text-success mr-2" />
-                            Gekopieerd
+                            <Check className="h-3 w-3 sm:h-4 sm:w-4 text-success mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Gekopieerd</span>
+                            <span className="sm:hidden">OK</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="h-4 w-4 mr-2" />
-                            Kopieer
+                            <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Kopieer</span>
+                            <span className="sm:hidden">Copy</span>
                           </>
                         )}
                       </Button>

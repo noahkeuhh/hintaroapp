@@ -144,41 +144,45 @@ const SettingsContent = () => {
     <div className="flex min-h-screen bg-background">
       <DashboardSidebar />
       
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <DashboardHeader />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-2xl font-bold font-display text-foreground mb-6">Settings</h1>
+            <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground mb-4 sm:mb-6">Settings</h1>
 
-            <Tabs defaultValue="account" className="space-y-6">
-              <TabsList>
-                <TabsTrigger value="account" className="gap-2">
-                  <User className="h-4 w-4" />
-                  Account
+            <Tabs defaultValue="account" className="space-y-4 sm:space-y-6">
+              <TabsList className="w-full sm:w-auto flex flex-wrap h-auto p-1 gap-1">
+                <TabsTrigger value="account" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
+                  <User className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden xs:inline">Account</span>
+                  <span className="xs:hidden">Acc</span>
                 </TabsTrigger>
-                <TabsTrigger value="billing" className="gap-2">
-                  <CreditCard className="h-4 w-4" />
-                  Billing
+                <TabsTrigger value="billing" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
+                  <CreditCard className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden xs:inline">Billing</span>
+                  <span className="xs:hidden">Bill</span>
                 </TabsTrigger>
-                <TabsTrigger value="notifications" className="gap-2">
-                  <Bell className="h-4 w-4" />
-                  Notifications
+                <TabsTrigger value="notifications" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
+                  <Bell className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Notifications</span>
+                  <span className="sm:hidden">Notif</span>
                 </TabsTrigger>
-                <TabsTrigger value="privacy" className="gap-2">
-                  <Shield className="h-4 w-4" />
-                  Privacy
+                <TabsTrigger value="privacy" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
+                  <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden xs:inline">Privacy</span>
+                  <span className="xs:hidden">Priv</span>
                 </TabsTrigger>
               </TabsList>
 
               {/* Account tab */}
-              <TabsContent value="account" className="space-y-6">
-                <div className="card-elevated p-6">
-                  <h2 className="text-lg font-bold text-foreground mb-4">Profile Information</h2>
-                  <div className="space-y-4 max-w-md">
+              <TabsContent value="account" className="space-y-4 sm:space-y-6">
+                <div className="card-elevated p-4 sm:p-6">
+                  <h2 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">Profile Information</h2>
+                  <div className="space-y-3 sm:space-y-4 max-w-md">
                     <div>
                       <Label htmlFor="email">Email</Label>
                       <Input 
@@ -216,9 +220,9 @@ const SettingsContent = () => {
                   </div>
                 </div>
 
-                <div className="card-elevated p-6">
-                  <h2 className="text-lg font-bold text-foreground mb-4">Change Password</h2>
-                  <div className="space-y-4 max-w-md">
+                <div className="card-elevated p-4 sm:p-6">
+                  <h2 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">Change Password</h2>
+                  <div className="space-y-3 sm:space-y-4 max-w-md">
                     <div>
                       <Label htmlFor="new">New Password</Label>
                       <Input 
@@ -424,29 +428,29 @@ const SettingsContent = () => {
                       )}
                     </div>
 
-                    <div className="card-elevated p-6">
-                      <h2 className="text-lg font-bold text-foreground mb-4">Usage Statistics</h2>
-                      <div className="grid sm:grid-cols-3 gap-4">
-                        <div className="p-4 bg-muted rounded-xl">
-                          <p className="text-2xl font-bold text-foreground">
+                    <div className="card-elevated p-4 sm:p-6">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">Usage Statistics</h2>
+                      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                        <div className="p-2 sm:p-4 bg-muted rounded-lg sm:rounded-xl">
+                          <p className="text-lg sm:text-2xl font-bold text-foreground">
                             {subscriptionData?.usage?.analyses_this_month || 0}
                           </p>
-                          <p className="text-sm text-muted-foreground">Analyses this month</p>
+                          <p className="text-[10px] sm:text-sm text-muted-foreground">Analyses</p>
                         </div>
-                        <div className="p-4 bg-muted rounded-xl">
-                          <p className="text-2xl font-bold text-foreground">
+                        <div className="p-2 sm:p-4 bg-muted rounded-lg sm:rounded-xl">
+                          <p className="text-lg sm:text-2xl font-bold text-foreground">
                             {subscriptionData?.usage?.credits_used_this_month || 0}
                           </p>
-                          <p className="text-sm text-muted-foreground">Credits used</p>
+                          <p className="text-[10px] sm:text-sm text-muted-foreground">Credits</p>
                         </div>
-                        <div className="p-4 bg-muted rounded-xl">
-                          <p className="text-2xl font-bold text-foreground">
+                        <div className="p-2 sm:p-4 bg-muted rounded-lg sm:rounded-xl">
+                          <p className="text-lg sm:text-2xl font-bold text-foreground">
                             {subscriptionData?.subscription_tier === 'free' ? 'Free' :
                              subscriptionData?.subscription_tier === 'pro' ? '100' :
                              subscriptionData?.subscription_tier === 'plus' ? '180' :
-                             subscriptionData?.subscription_tier === 'max' ? '300' : '0'}/day
+                             subscriptionData?.subscription_tier === 'max' ? '300' : '0'}
                           </p>
-                          <p className="text-sm text-muted-foreground">Daily limit</p>
+                          <p className="text-[10px] sm:text-sm text-muted-foreground">/day</p>
                         </div>
                       </div>
                     </div>

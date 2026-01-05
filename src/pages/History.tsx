@@ -135,32 +135,32 @@ const HistoryContent = () => {
     <div className="flex min-h-screen bg-background">
       <DashboardSidebar />
       
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <DashboardHeader />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex flex-col gap-3 mb-4 sm:mb-6">
               <div>
-                <h1 className="text-2xl font-bold font-display text-foreground">Geschiedenis</h1>
-                <p className="text-muted-foreground">Bekijk al je eerdere analyses</p>
+                <h1 className="text-xl sm:text-2xl font-bold font-display text-foreground">Geschiedenis</h1>
+                <p className="text-sm text-muted-foreground">Bekijk al je eerdere analyses</p>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="relative">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                <div className="relative flex-1 sm:flex-initial">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="Zoeken..."
-                    className="pl-10 w-64"
+                    className="pl-10 w-full sm:w-64"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
                 <Select value={filterStatus} onValueChange={setFilterStatus}>
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-full sm:w-40">
                     <Filter className="h-4 w-4 mr-2" />
                     <SelectValue placeholder="Filter" />
                   </SelectTrigger>
@@ -185,7 +185,7 @@ const HistoryContent = () => {
                 <p className="text-destructive">Fout bij laden van geschiedenis</p>
               </div>
             ) : filteredHistory.length > 0 ? (
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {filteredHistory.map((item, index) => {
                   const result = item.analysis_result;
                   const intent = getIntentLabel(result);
@@ -202,77 +202,57 @@ const HistoryContent = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className="card-elevated p-4 group"
+                      className="card-elevated p-3 sm:p-4 group"
+                      onClick={() => {
+                        if (item.status === "done") {
+                          setSelectedAnalysisId(item.id);
+                          setIsDetailModalOpen(true);
+                        }
+                      }}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                          <MessageSquare className="h-5 w-5 text-accent" />
+                      <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                          <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <p className="text-foreground font-medium truncate">
-                            "{item.input_text?.substring(0, 60) || "Geen tekst"}..."
+                          <p className="text-sm sm:text-base text-foreground font-medium line-clamp-2 sm:truncate">
+                            "{item.input_text?.substring(0, 50) || "Geen tekst"}..."
                           </p>
-                          <div className="flex items-center gap-2 mt-2 flex-wrap">
-                            {intent && intent !== "Onbekend" && (
-                              <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                                Intent: {intent}
-                              </span>
-                            )}
-                            {tone && tone !== "Neutraal" && (
-                              <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                                Tone: {tone}
-                              </span>
-                            )}
-                            {interestLevel > 0 && (
-                              <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                                Interest: {interestLevel}%
-                              </span>
-                            )}
-                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${riskBadge.color}`}>
-                              {riskBadge.label}
-                            </span>
-                            {providerBadge.label && (
-                              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${providerBadge.color}`}>
-                                {providerBadge.label}
-                              </span>
-                            )}
+                          <div className="flex items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2 flex-wrap">
                             {modeBadge && (
-                              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${modeBadge.color}`}>
+                              <span className={`text-[10px] sm:text-xs font-medium px-1.5 sm:px-2 py-0.5 rounded-full ${modeBadge.color}`}>
                                 {modeBadge.label}
                               </span>
                             )}
+                            <span className={`text-[10px] sm:text-xs font-medium px-1.5 sm:px-2 py-0.5 rounded-full ${riskBadge.color}`}>
+                              {riskBadge.label}
+                            </span>
+                            {interestLevel > 0 && (
+                              <span className="text-[10px] sm:text-xs font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                                {interestLevel}%
+                              </span>
+                            )}
                           </div>
-                          <div className="flex items-center gap-3 mt-2 flex-wrap">
-                            <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <div className="flex items-center gap-2 sm:gap-3 mt-1.5 sm:mt-2 flex-wrap">
+                            <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
                               {formatDistanceToNow(new Date(item.created_at), { addSuffix: true, locale: nl })}
                             </span>
-                            <span className="text-xs text-muted-foreground">
-                              {item.credits_used} credits
+                            <span className="text-[10px] sm:text-xs text-muted-foreground">
+                              {item.credits_used} cr
                             </span>
                             {item.status === "processing" && (
-                              <span className="text-xs text-muted-foreground flex items-center gap-1">
+                              <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                                 <Loader2 className="h-3 w-3 animate-spin" />
-                                Verwerken...
                               </span>
                             )}
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                           {item.status === "done" && (
-                            <Button 
-                              variant="ghost" 
-                              size="icon" 
-                              className="h-8 w-8"
-                              onClick={() => {
-                                setSelectedAnalysisId(item.id);
-                                setIsDetailModalOpen(true);
-                              }}
-                            >
-                              <ChevronRight className="h-4 w-4" />
-                            </Button>
+                            <ChevronRight className="h-4 w-4 text-muted-foreground" />
                           )}
                         </div>
                       </div>
