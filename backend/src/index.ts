@@ -15,7 +15,8 @@ app.use(cors({
     'http://localhost:5173',
     'http://[::1]:8080',
     'http://[::1]:5173',
-    'https://hintaro.app', // Vercel frontend
+    'https://hintaro.app',
+    'https://hintaroapp.vercel.app', // Vercel frontend
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
