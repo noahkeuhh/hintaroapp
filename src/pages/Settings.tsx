@@ -16,7 +16,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   User,
   CreditCard,
-  Bell,
   Shield,
   Trash2,
   Download,
@@ -48,11 +47,6 @@ const SettingsContent = () => {
     current: "",
     new: "",
     confirm: "",
-  });
-  const [notifications, setNotifications] = useState({
-    email: true,
-    push: false,
-    marketing: false,
   });
 
   // Fetch subscription data
@@ -179,11 +173,6 @@ const SettingsContent = () => {
                   <CreditCard className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden xs:inline">Billing</span>
                   <span className="xs:hidden">Bill</span>
-                </TabsTrigger>
-                <TabsTrigger value="notifications" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
-                  <Bell className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span className="hidden sm:inline">Notifications</span>
-                  <span className="sm:hidden">Notif</span>
                 </TabsTrigger>
                 <TabsTrigger value="privacy" className="gap-1 sm:gap-2 text-xs sm:text-sm flex-1 sm:flex-initial py-1.5 sm:py-2">
                   <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -472,57 +461,6 @@ const SettingsContent = () => {
                     </div>
                   </>
                 )}
-              </TabsContent>
-
-              {/* Notifications tab */}
-              <TabsContent value="notifications" className="space-y-6">
-                <div className="card-elevated p-6">
-                  <h2 className="text-lg font-bold text-foreground mb-4">Notification Preferences</h2>
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-foreground">Email Notifications</p>
-                        <p className="text-sm text-muted-foreground">
-                          Receive updates about your account via email
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.email}
-                        onCheckedChange={(checked) =>
-                          setNotifications({ ...notifications, email: checked })
-                        }
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-foreground">Push Notifications</p>
-                        <p className="text-sm text-muted-foreground">
-                          Receive push notifications in your browser
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.push}
-                        onCheckedChange={(checked) =>
-                          setNotifications({ ...notifications, push: checked })
-                        }
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-foreground">Marketing Emails</p>
-                        <p className="text-sm text-muted-foreground">
-                          Tips, new features and special offers
-                        </p>
-                      </div>
-                      <Switch
-                        checked={notifications.marketing}
-                        onCheckedChange={(checked) =>
-                          setNotifications({ ...notifications, marketing: checked })
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
               </TabsContent>
 
               {/* Privacy tab */}

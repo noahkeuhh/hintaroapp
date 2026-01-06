@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import {
-  Bell,
   Zap,
   ChevronDown,
   Settings,
@@ -28,7 +26,6 @@ interface DashboardHeaderProps {
 export const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const [hasNotifications] = useState(true);
 
   const handleSignOut = async () => {
     try {
@@ -73,14 +70,6 @@ export const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
               <Zap className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">Upgrade</span>
             </Button>
-
-            {/* Notifications */}
-            <button className="relative p-2 rounded-lg hover:bg-sidebar-accent/60 transition-colors">
-              <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-sidebar-foreground/80" />
-              {hasNotifications && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-sidebar-primary rounded-full" />
-              )}
-            </button>
 
             {/* Profile dropdown */}
             <DropdownMenu>
