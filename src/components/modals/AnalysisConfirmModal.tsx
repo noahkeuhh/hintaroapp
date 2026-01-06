@@ -68,7 +68,7 @@ export const AnalysisConfirmModal = ({
               <div>
                 <p className="font-medium text-foreground text-sm sm:text-base">Image Analysis</p>
                 <p className="text-xs sm:text-sm text-muted-foreground">
-                  +50 credits for visual content analysis
+                  Visual content included in analysis
                 </p>
               </div>
             </div>

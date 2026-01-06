@@ -5,47 +5,47 @@ import { Check, Zap } from "lucide-react";
 const plans = [
   {
     name: "Pro",
-    price: "€17",
+    price: "€14.99",
     credits: "100 credits",
     period: "per month",
-    mode: "Snapshot default",
+    mode: "Snapshot included",
     features: [
       "100 credits per month",
-      "Snapshot mode included",
-      "Expanded: 10 credits/use",
-      "Deep: 30 credits/use",
-      "Buy top-ups: €5/50 or €9.99/100"
+      "Snapshot analysis included",
+      "Intent & tone detection",
+      "3 response suggestions",
+      "Full chat history"
     ],
     highlighted: false
   },
   {
     name: "Plus",
-    price: "€29",
+    price: "€29.99",
     credits: "180 credits",
     period: "per month",
     mode: "Expanded included",
     features: [
       "180 credits per month",
-      "Snapshot mode: 1 credit",
-      "Expanded mode included",
-      "Deep: 15 credits/use",
-      "Buy top-ups if needed"
+      "Expanded analysis included",
+      "Smarter explanations",
+      "Image analysis included",
+      "Deep analysis available when needed"
     ],
     highlighted: true,
-    badge: "Best value"
+    badge: "Most popular"
   },
   {
     name: "Max",
-    price: "€59",
+    price: "€49.99",
     credits: "300 credits",
     period: "per month",
     mode: "Deep included",
     features: [
       "300 credits per month",
-      "Snapshot: 1 credit",
-      "Expanded: 3 credits",
-      "Deep mode included",
-      "Priority support"
+      "Deep analysis included",
+      "Full intent & context breakdown",
+      "Image analysis included",
+      "Priority processing & support"
     ],
     highlighted: false
   }
@@ -162,10 +162,7 @@ export const PricingSection = ({ onSignupClick }: PricingSectionProps) => {
           className="text-center space-y-2"
         >
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Free plan: 1 Snapshot analysis per month. No card required.
-          </p>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
-            All paid plans can buy extra credits: €5/50 credits or €9.99/100 credits.
+            Free plan: 1 free snapshot analysis per month. No card required.
           </p>
         </motion.div>
       </div>

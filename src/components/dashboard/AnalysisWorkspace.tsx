@@ -562,7 +562,7 @@ export const AnalysisWorkspace = () => {
                     Or click to upload (PNG, JPG)
                   </p>
                   <p className="text-xs text-accent mt-2">
-                    Image analysis — 30 credits per image
+                    Image analysis uses more credits
                   </p>
                   <input
                     type="file"
@@ -612,12 +612,12 @@ export const AnalysisWorkspace = () => {
               )}
               {subscriptionTier === 'plus' && (
                 <span className="text-xs text-muted-foreground">
-                  Expanded included, Deep (+12 credits)
+                  Expanded included, Deep available
                 </span>
               )}
               {subscriptionTier === 'max' && (
                 <span className="text-xs text-muted-foreground">
-                  Deep included (×1.2)
+                  Deep analysis included
                 </span>
               )}
             </div>
@@ -644,9 +644,6 @@ export const AnalysisWorkspace = () => {
                       title={deepDisabled ? "Deep mode requires text longer than 100 characters" : undefined}
                     >
                       {getModeLabelWithContext(mode)}
-                      {isDeepMode && subscriptionTier === 'max' && (
-                        <span className="ml-1 text-xs">(×1.2)</span>
-                      )}
                     </button>
                   );
                 })}
@@ -679,8 +676,8 @@ export const AnalysisWorkspace = () => {
                     className="rounded"
                   />
                   <div className="flex-1">
-                    <span className="text-sm font-medium">Deep Analyse</span>
-                    <span className="text-xs text-muted-foreground ml-1">(+12 credits)</span>
+                    <span className="text-sm font-medium">Deep Analysis</span>
+                    <span className="text-xs text-muted-foreground ml-1">(uses more credits)</span>
                   </div>
                 </label>
               </div>

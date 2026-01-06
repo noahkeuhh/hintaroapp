@@ -367,7 +367,7 @@ export const AnalysisResults = ({
                     <p className="font-medium text-foreground text-sm">Want more detail?</p>
                   </div>
                   <p className="text-muted-foreground text-xs mb-3">
-                    Enable Expanded toggle for deeper insights.
+                    Enable Expanded for deeper insights.
                   </p>
                   <Button
                     variant="outline"
@@ -376,7 +376,7 @@ export const AnalysisResults = ({
                     onClick={() => onModeChange("expanded")}
                   >
                     <Zap className="h-3 w-3" />
-                    Expanded toggle — +12 credits
+                    Unlock Expanded analysis
                   </Button>
                 </div>
               )}
@@ -401,7 +401,7 @@ export const AnalysisResults = ({
                     <p className="font-medium text-foreground text-sm">Deep Mode</p>
                   </div>
                   <p className="text-muted-foreground text-xs mb-3">
-                    Deep mode requires Max tier (auto-selected for images and long text).
+                    Upgrade to Max for full Deep analysis — never guess again.
                   </p>
                 </div>
               )}
@@ -413,7 +413,7 @@ export const AnalysisResults = ({
                     <p className="font-medium text-foreground text-sm">Deep Mode</p>
                   </div>
                   <p className="text-muted-foreground text-xs mb-3">
-                    Upgrade to Max tier for Deep mode (auto-selected for images and long text).
+                    Unlock Deep analysis anytime, or upgrade to Max for it included.
                   </p>
                 </div>
               )}

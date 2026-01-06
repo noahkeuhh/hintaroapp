@@ -9,7 +9,7 @@ import {
 const faqs = [
   {
     question: "What's included in the free plan?",
-    answer: "1 Snapshot analysis per month. No card required. You can upgrade or buy top-up credits anytime."
+    answer: "1 free snapshot analysis per month. No card required. Upgrade anytime for more."
   },
   {
     question: "What's the difference between Snapshot, Expanded, and Deep?",
@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: "Can I analyze screenshots?",
-    answer: "Yes. Upload a screenshot of the chat. Works on Plus and Max plans (Expanded/Deep modes)."
+    answer: "Yes. Upload a screenshot of the chat. Image analysis is supported on all paid plans."
   },
   {
     question: "Is my data stored? How private is this?",
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     question: "How do credits work?",
-    answer: "Each plan gives you monthly credits. Snapshot costs 1 credit (free on Pro), Expanded costs 3-10 credits depending on plan, Deep costs 15-30 credits. Unused credits don't roll over."
+    answer: "Each plan gives you monthly credits. Simple analyses use fewer credits, while more detailed analyses use more. You'll always see an estimate before analyzing."
   },
   {
     question: "Can I buy extra credits?",
-    answer: "Yes. All paid plans can buy top-ups: €5 for 50 credits or €9.99 for 100 credits."
+    answer: "Yes. If you need more credits, top-ups are available within the app when you're running low."
   },
   {
     question: "Can I cancel anytime?",

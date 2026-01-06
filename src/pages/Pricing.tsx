@@ -22,11 +22,11 @@ const plans = [
     tier: "free",
     monthlyPrice: 0,
     yearlyPrice: 0,
-    credits: "1 analysis",
+    credits: "1 free analysis",
     icon: Shield,
-    description: "Test the app",
+    description: "Try it out",
     features: [
-      { text: "1 free analysis", included: true },
+      { text: "1 free snapshot analysis per month", included: true },
       { text: "Basic text analysis", included: true },
       { text: "Intent & tone detection", included: true },
       { text: "2 response options", included: true },
@@ -39,18 +39,18 @@ const plans = [
   {
     name: "Pro",
     tier: "pro",
-    monthlyPrice: 17,
-    yearlyPrice: 15,
-    credits: "100/day",
+    monthlyPrice: 14.99,
+    yearlyPrice: 12.99,
+    credits: "100 credits/month",
     icon: Zap,
-    description: "For regular use",
+    description: "For everyday conversations",
     features: [
-      { text: "100 credits per day", included: true },
-      { text: "Basic & expanded analysis", included: true },
-      { text: "Multiple response options", included: true },
+      { text: "100 credits per month", included: true },
+      { text: "Snapshot analysis included", included: true },
+      { text: "Quick intent & tone detection", included: true },
+      { text: "3 response suggestions", included: true },
       { text: "Chat history", included: true },
-      { text: "Fast response time", included: true },
-      { text: "Image analysis", included: false },
+      { text: "Expanded analysis", included: false },
       { text: "Deep analysis", included: false },
     ],
     popular: false,
@@ -58,72 +58,71 @@ const plans = [
   {
     name: "Plus",
     tier: "plus",
-    monthlyPrice: 29,
-    yearlyPrice: 26,
-    credits: "180/day",
+    monthlyPrice: 29.99,
+    yearlyPrice: 24.99,
+    credits: "180 credits/month",
     icon: Crown,
-    description: "For serious users",
+    description: "For serious conversations",
     features: [
-      { text: "180 credits per day", included: true },
-      { text: "All analysis modes", included: true },
+      { text: "180 credits per month", included: true },
+      { text: "Expanded analysis included", included: true },
+      { text: "Smarter explanations", included: true },
       { text: "Image analysis included", included: true },
-      { text: "Deep analysis option", included: true },
-      { text: "Extended detail depth", included: true },
+      { text: "Deep analysis available when needed", included: true },
       { text: "Chat history", included: true },
       { text: "Priority support", included: false },
     ],
-    popular: false,
+    popular: true,
   },
   {
     name: "Max",
     tier: "max",
-    monthlyPrice: 59,
-    yearlyPrice: 53,
-    credits: "300/day",
+    monthlyPrice: 49.99,
+    yearlyPrice: 41.99,
+    credits: "300 credits/month",
     icon: Gem,
-    description: "Maximum capabilities",
+    description: "Never guess again",
     features: [
-      { text: "300 credits per day", included: true },
-      { text: "All analysis modes", included: true },
-      { text: "Full deep analysis", included: true },
+      { text: "300 credits per month", included: true },
+      { text: "Deep analysis included", included: true },
+      { text: "Full intent & context breakdown", included: true },
       { text: "Image analysis included", included: true },
-      { text: "Conversation flow simulations", included: true },
+      { text: "Priority processing & support", included: true },
       { text: "Chat history", included: true },
-      { text: "Priority support", included: true },
       { text: "Early access to new features", included: true },
     ],
-    popular: true,
+    popular: false,
   },
 ];
 
 const billingFaqs = [
   {
     question: "What can I do with my credits?",
-    answer: "Short text analysis costs 5 credits, long text 12 credits, and image analysis 30 credits. Deep analysis (Max tier) costs slightly more. With 100 credits per day, you can do many analyses.",
+    answer: "Credits let you analyze conversations at different depths. Simple analyses use fewer credits, while more detailed analyses use more. You'll always see an estimate before you analyze.",
   },
   {
     question: "What's the difference between subscriptions?",
-    answer: "Free: 1 free analysis to test. Pro: 100 credits/day for regular use. Plus: 180 credits/day with images. Max: 300 credits/day with advanced analyses and priority support.",
+    answer: "Pro is perfect for everyday use with snapshot analysis included. Plus unlocks smarter expanded analysis as your default. Max gives you full deep analysis included — never guess again.",
   },
   {
     question: "What is deep analysis?",
-    answer: "Deep analysis (Max tier only) offers detailed conversation flow simulations, escalation advice, and risk detection. The output is much more comprehensive than standard analyses.",
+    answer: "Deep analysis provides comprehensive conversation insights including intent mapping, context breakdown, and detailed response strategies. It's included with Max, and available anytime on other plans.",
   },
   {
     question: "Are unused credits carried over?",
-    answer: "No, daily credits reset every night at 00:00 and are not carried over. This ensures fair usage.",
+    answer: "Credits are refreshed monthly to ensure you always have a fresh balance. Need more? You can top up anytime.",
   },
   {
     question: "Can I upgrade or downgrade?",
-    answer: "Yes, you can always switch plans. With an upgrade, you get immediate access to more credits. With a downgrade, this takes effect at the end of your current period.",
+    answer: "Yes, you can switch plans anytime. Upgrades take effect immediately. Downgrades apply at the end of your billing period.",
   },
   {
     question: "How does the money-back guarantee work?",
-    answer: "Within 14 days of your first payment, you get a full refund, no questions asked. Send an email to support and we'll take care of it.",
+    answer: "Within 14 days of your first payment, you get a full refund, no questions asked. Just reach out to support.",
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, Amex), iDEAL, Bancontact and more via our payment provider Stripe.",
+    answer: "We accept all major credit cards (Visa, Mastercard, Amex), iDEAL, Bancontact and more via Stripe.",
   },
 ];
 
@@ -398,14 +397,14 @@ const Pricing = () => {
               </thead>
               <tbody>
                 <tr className="border-b border-border">
-                  <td className="p-4 text-muted-foreground">Daily credits</td>
-                  <td className="p-4 text-center font-medium">1 total</td>
+                  <td className="p-4 text-muted-foreground">Monthly credits</td>
+                  <td className="p-4 text-center font-medium">1 free</td>
                   <td className="p-4 text-center font-medium">100</td>
                   <td className="p-4 text-center font-medium">180</td>
                   <td className="p-4 text-center font-medium bg-accent/10 border border-accent/20">300</td>
                 </tr>
                 <tr className="border-b border-border">
-                  <td className="p-4 text-muted-foreground">Basic analysis</td>
+                  <td className="p-4 text-muted-foreground">Snapshot analysis</td>
                   <td className="p-4 text-center"><Check className="h-5 w-5 text-success mx-auto" /></td>
                   <td className="p-4 text-center"><Check className="h-5 w-5 text-success mx-auto" /></td>
                   <td className="p-4 text-center"><Check className="h-5 w-5 text-success mx-auto" /></td>

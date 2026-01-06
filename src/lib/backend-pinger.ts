@@ -5,7 +5,7 @@
  * Dit script pingt elke 5 minuten om dit te voorkomen
  */
 
-const BACKEND_URL = process.env.VITE_API_URL || 'http://localhost:3001/api';
+const BACKEND_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 const PING_INTERVAL = 5 * 60 * 1000; // 5 minutes (moet onder de 15 minuten zijn)
 
 async function pingBackend() {

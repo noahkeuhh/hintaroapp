@@ -322,23 +322,25 @@ const SettingsContent = () => {
                               )}
                               {subscriptionData.subscription_tier === 'pro' && (
                                 <>
-                                  <p>✓ 100 credits per day</p>
-                                  <p>✓ Snapshot & Expanded modes</p>
+                                  <p>✓ 100 credits per month</p>
+                                  <p>✓ Snapshot analysis included</p>
+                                  <p>✓ Intent & tone detection</p>
                                 </>
                               )}
                               {subscriptionData.subscription_tier === 'plus' && (
                                 <>
-                                  <p>✓ 180 credits per day</p>
-                                  <p>✓ Auto mode selection</p>
-                                  <p>✓ Expanded mode included</p>
-                                  <p>✓ Deep analysis toggle (+12 credits)</p>
+                                  <p>✓ 180 credits per month</p>
+                                  <p>✓ Expanded analysis included</p>
+                                  <p>✓ Smarter explanations</p>
+                                  <p>✓ Deep analysis available</p>
                                 </>
                               )}
                               {subscriptionData.subscription_tier === 'max' && (
                                 <>
-                                  <p>✓ 300 credits per day</p>
-                                  <p>✓ Auto mode selection</p>
-                                  <p>✓ Deep mode included (×1.2)</p>
+                                  <p>✓ 300 credits per month</p>
+                                  <p>✓ Deep analysis included</p>
+                                  <p>✓ Full intent & context breakdown</p>
+                                  <p>✓ Priority processing</p>
                                 </>
                               )}
                             </div>
