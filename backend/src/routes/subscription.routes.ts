@@ -33,6 +33,17 @@ router.post('/subscribe', authenticateUser, async (req: AuthenticatedRequest, re
     // Get or create Stripe customer
     let customerId = user.stripe_customer_id;
 
+    if (customerId) {
+      // Verify customer exists in current Stripe environment (test vs live)
+      try {
+        await stripe.customers.retrieve(customerId);
+      } catch (err: any) {
+        // Customer doesn't exist (probably from different Stripe environment)
+        console.log(`Stripe customer ${customerId} not found, creating new one`);
+        customerId = null;
+      }
+    }
+
     if (!customerId) {
       const customer = await stripe.customers.create({
         email: user.email,
