@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Navbar } from "@/components/landing/NavbarNew";
 import { Hero } from "@/components/landing/HeroNew";
@@ -22,6 +22,17 @@ const LandingContent = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Handle login=true query parameter (e.g., after password reset)
+  useEffect(() => {
+    if (searchParams.get('login') === 'true') {
+      setIsLoginOpen(true);
+      // Remove the query parameter from URL
+      searchParams.delete('login');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const handleSignupSuccess = () => {
     navigate("/dashboard", { replace: true });

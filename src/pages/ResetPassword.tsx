@@ -94,15 +94,20 @@ const ResetPassword = () => {
 
       await api.resetPassword(session.access_token, password);
 
+      // IMPORTANT: Sign out the user to clear the old recovery session
+      // This prevents the frontend from thinking the user is still logged in
+      // with the old (now invalid) session token
+      await supabase.auth.signOut();
+
       setPasswordReset(true);
       toast({
         title: "Password reset successful!",
-        description: "Your password has been updated. You can now log in.",
+        description: "Your password has been updated. You can now log in with your new password.",
       });
 
-      // Redirect to home after 2 seconds
+      // Redirect to home after 2 seconds (user will need to log in)
       setTimeout(() => {
-        navigate("/");
+        navigate("/?login=true");
       }, 2000);
     } catch (error: any) {
       console.error("Reset password error:", error);
