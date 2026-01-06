@@ -13,14 +13,16 @@ const plans = [
     name: "Pro",
     tier: "pro",
     price: "14.99",
-    credits: "100",
     icon: Zap,
-    description: "For everyday conversations",
+    headline: "Clarity for every message.",
+    subline: "100 credits • Smart Snapshot included",
+    cta: "Start Pro",
+    bestFor: "Best for: daily dating & consistent texting.",
     features: [
-      "100 credits/month",
-      "Snapshot analysis included",
-      "Intent & tone detection",
-      "Chat history",
+      "See interest level at a glance",
+      "Intent + tone detection",
+      "Best time to reply",
+      "Full chat history",
     ],
     popular: false,
     color: "from-blue-500 to-cyan-500",
@@ -29,14 +31,16 @@ const plans = [
     name: "Plus",
     tier: "plus",
     price: "29.99",
-    credits: "180",
     icon: Crown,
-    description: "Smarter analysis by default",
+    headline: "Deeper context, better replies.",
+    subline: "180 credits • Expanded included",
+    cta: "Start Plus",
+    bestFor: "Best for: mixed signals & important conversations.",
     features: [
-      "180 credits/month",
-      "Expanded analysis included",
-      "Image analysis included",
-      "Deep available when needed",
+      "Expanded analysis by default",
+      "Smarter explanations",
+      "Images supported",
+      "Deep available anytime",
     ],
     popular: true,
     color: "from-accent to-rose-500",
@@ -45,13 +49,15 @@ const plans = [
     name: "Max",
     tier: "max",
     price: "49.99",
-    credits: "300",
     icon: Gem,
-    description: "Never guess again",
+    headline: "Maximum confidence.",
+    subline: "300 credits • Deep included",
+    cta: "Start Max",
+    bestFor: "Best for: power users & serious dating.",
     features: [
-      "300 credits/month",
       "Deep analysis included",
-      "Full context breakdown",
+      "Full intent + context breakdown",
+      "Conversation flow + next steps",
       "Priority support",
     ],
     popular: false,
@@ -126,24 +132,21 @@ export const PricingTeaser = ({ onSubscribeClick }: PricingTeaserProps) => {
                 <plan.icon className="h-7 w-7 text-white" />
               </div>
 
-              <h3 className="text-2xl font-bold font-display mb-2">{plan.name}</h3>
-              <p className={`text-sm mb-6 ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>
-                {plan.description}
+              <h3 className="text-2xl font-bold font-display mb-1">{plan.name}</h3>
+              <p className={`text-sm mb-4 ${plan.popular ? 'text-amber-400' : 'text-accent'}`}>
+                {plan.headline}
               </p>
 
-              <div className="mb-8">
+              <div className="mb-4">
                 <span className="text-5xl font-bold font-display">€{plan.price}</span>
                 <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>/month</span>
               </div>
 
-              <div className={`flex items-center gap-3 mb-8 p-4 rounded-2xl ${
-                plan.popular ? 'bg-white/10' : 'bg-accent/5'
-              }`}>
-                <Zap className={`h-5 w-5 ${plan.popular ? 'text-amber-400' : 'text-accent'}`} />
-                <span className="font-bold text-lg">{plan.credits} credits/day</span>
-              </div>
+              <p className={`text-sm mb-6 ${plan.popular ? 'text-white/60' : 'text-muted-foreground'}`}>
+                {plan.subline}
+              </p>
 
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-6">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className={`h-5 w-5 mt-0.5 flex-shrink-0 ${
@@ -154,13 +157,18 @@ export const PricingTeaser = ({ onSubscribeClick }: PricingTeaserProps) => {
                 ))}
               </ul>
 
+              <p className={`text-xs mb-6 ${plan.popular ? 'text-white/50' : 'text-muted-foreground/60'}`}>
+                {plan.bestFor}
+              </p>
+
               <Button
                 variant={plan.popular ? "hero" : "outline"}
                 className="w-full"
                 size="lg"
                 onClick={() => handleSubscribe(plan.tier)}
               >
-                Start {plan.name}
+                {plan.popular && <Zap className="h-4 w-4 mr-2" />}
+                {plan.cta}
               </Button>
             </motion.div>
           ))}

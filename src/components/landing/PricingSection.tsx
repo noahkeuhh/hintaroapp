@@ -6,14 +6,17 @@ const plans = [
   {
     name: "Pro",
     price: "€14.99",
-    credits: "100 credits",
     period: "per month",
-    mode: "Snapshot included",
+    headline: "Clarity for every message.",
+    subline: "100 credits • Smart Snapshot analysis included",
+    cta: "Start Pro",
+    bestFor: "Best for: daily dating & consistent texting.",
     features: [
-      "100 credits per month",
-      "Snapshot analysis included",
-      "Intent & tone detection",
-      "3 response suggestions",
+      "See interest level at a glance",
+      "Intent + tone detection",
+      "Best time to reply",
+      "Save replies you like",
+      "Earn badges as you improve",
       "Full chat history"
     ],
     highlighted: false
@@ -21,15 +24,18 @@ const plans = [
   {
     name: "Plus",
     price: "€29.99",
-    credits: "180 credits",
     period: "per month",
-    mode: "Expanded included",
+    headline: "Deeper context, better replies.",
+    subline: "180 credits • Expanded included",
+    cta: "Start Plus",
+    bestFor: "Best for: mixed signals & important conversations.",
     features: [
-      "180 credits per month",
-      "Expanded analysis included",
+      "Expanded analysis by default",
       "Smarter explanations",
-      "Image analysis included",
-      "Deep analysis available when needed"
+      "More reply options",
+      "Interest level + timing guidance",
+      "Images supported",
+      "Deep available anytime"
     ],
     highlighted: true,
     badge: "Most popular"
@@ -37,15 +43,18 @@ const plans = [
   {
     name: "Max",
     price: "€49.99",
-    credits: "300 credits",
     period: "per month",
-    mode: "Deep included",
+    headline: "Maximum confidence.",
+    subline: "300 credits • Deep included",
+    cta: "Start Max",
+    bestFor: "Best for: power users & serious dating.",
     features: [
-      "300 credits per month",
       "Deep analysis included",
-      "Full intent & context breakdown",
-      "Image analysis included",
-      "Priority processing & support"
+      "Full intent + context breakdown",
+      "Conversation flow + next steps",
+      "Best replies (multiple styles)",
+      "Priority processing",
+      "Priority support"
     ],
     highlighted: false
   }
@@ -101,10 +110,13 @@ export const PricingSection = ({ onSignupClick }: PricingSectionProps) => {
               )}
 
               <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2" style={{ color: "#E9ECF5" }}>
+                <h3 className="text-2xl font-bold mb-1" style={{ color: "#E9ECF5" }}>
                   {plan.name}
                 </h3>
-                <div className="flex items-baseline gap-2 mb-1">
+                <p className="text-base mb-3" style={{ color: "#5CE1E6" }}>
+                  {plan.headline}
+                </p>
+                <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-4xl font-bold" style={{ color: "#E9ECF5" }}>
                     {plan.price}
                   </span>
@@ -113,7 +125,7 @@ export const PricingSection = ({ onSignupClick }: PricingSectionProps) => {
                   </span>
                 </div>
                 <p className="text-sm" style={{ color: "#A7B1C5" }}>
-                  {plan.credits} • {plan.mode}
+                  {plan.subline}
                 </p>
               </div>
 
@@ -133,23 +145,30 @@ export const PricingSection = ({ onSignupClick }: PricingSectionProps) => {
                 {plan.highlighted ? (
                   <>
                     <Zap className="w-4 h-4 mr-2" />
-                    Start with Plus
+                    {plan.cta}
                   </>
                 ) : (
-                  `Choose ${plan.name}`
+                  plan.cta
                 )}
               </Button>
 
-              <div className="space-y-3">
+              <div className="space-y-3 mb-4">
+                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "#6B7280" }}>
+                  What you get
+                </p>
                 {plan.features.map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "#5CE1A8" }} />
-                    <span className="text-sm" style={{ color: "#A7B1C5" }}>
+                    <span className={`text-sm ${i < 3 && plan.name === 'Pro' ? 'font-medium' : ''}`} style={{ color: i < 3 && plan.name === 'Pro' ? "#E9ECF5" : "#A7B1C5" }}>
                       {feature}
                     </span>
                   </div>
                 ))}
               </div>
+
+              <p className="text-xs mt-4 pt-4 border-t" style={{ color: "#6B7280", borderColor: "#1A2233" }}>
+                {plan.bestFor}
+              </p>
             </motion.div>
           ))}
         </div>

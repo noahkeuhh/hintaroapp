@@ -22,17 +22,20 @@ const plans = [
     tier: "free",
     monthlyPrice: 0,
     yearlyPrice: 0,
+    headline: "See what's possible.",
+    subline: "1 free analysis • Try Snapshot mode",
     credits: "1 free analysis",
     icon: Shield,
-    description: "Try it out",
+    description: "See what's possible.",
+    cta: "Try Free",
+    bestFor: "Best for: curious first-timers.",
     features: [
-      { text: "1 free snapshot analysis per month", included: true },
-      { text: "Basic text analysis", included: true },
+      { text: "1 snapshot analysis per month", included: true },
       { text: "Intent & tone detection", included: true },
-      { text: "2 response options", included: true },
-      { text: "Expanded analysis", included: false },
-      { text: "Image analysis", included: false },
+      { text: "2 response suggestions", included: true },
       { text: "Chat history", included: false },
+      { text: "Expanded analysis", included: false },
+      { text: "Deep analysis", included: false },
     ],
     popular: false,
   },
@@ -41,17 +44,20 @@ const plans = [
     tier: "pro",
     monthlyPrice: 14.99,
     yearlyPrice: 12.99,
+    headline: "Clarity for every message.",
+    subline: "100 credits • Smart Snapshot analysis included",
     credits: "100 credits/month",
     icon: Zap,
-    description: "For everyday conversations",
+    description: "Clarity for every message.",
+    cta: "Start Pro",
+    bestFor: "Best for: daily dating & consistent texting.",
     features: [
-      { text: "100 credits per month", included: true },
-      { text: "Snapshot analysis included", included: true },
-      { text: "Quick intent & tone detection", included: true },
-      { text: "3 response suggestions", included: true },
-      { text: "Chat history", included: true },
-      { text: "Expanded analysis", included: false },
-      { text: "Deep analysis", included: false },
+      { text: "See interest level at a glance", included: true, highlight: true },
+      { text: "Intent + tone detection", included: true, highlight: true },
+      { text: "Best time to reply", included: true, highlight: true },
+      { text: "Save replies you like", included: true },
+      { text: "Earn badges as you improve", included: true },
+      { text: "Full chat history", included: true },
     ],
     popular: false,
   },
@@ -60,17 +66,20 @@ const plans = [
     tier: "plus",
     monthlyPrice: 29.99,
     yearlyPrice: 24.99,
+    headline: "Deeper context, better replies.",
+    subline: "180 credits • Expanded included",
     credits: "180 credits/month",
     icon: Crown,
-    description: "For serious conversations",
+    description: "Deeper context, better replies.",
+    cta: "Start Plus",
+    bestFor: "Best for: mixed signals & important conversations.",
     features: [
-      { text: "180 credits per month", included: true },
-      { text: "Expanded analysis included", included: true },
+      { text: "Expanded analysis by default", included: true },
       { text: "Smarter explanations", included: true },
-      { text: "Image analysis included", included: true },
-      { text: "Deep analysis available when needed", included: true },
-      { text: "Chat history", included: true },
-      { text: "Priority support", included: false },
+      { text: "More reply options", included: true },
+      { text: "Interest level + timing guidance", included: true },
+      { text: "Images supported", included: true },
+      { text: "Deep available anytime", included: true },
     ],
     popular: true,
   },
@@ -79,17 +88,20 @@ const plans = [
     tier: "max",
     monthlyPrice: 49.99,
     yearlyPrice: 41.99,
+    headline: "Maximum confidence.",
+    subline: "300 credits • Deep included",
     credits: "300 credits/month",
     icon: Gem,
-    description: "Never guess again",
+    description: "Maximum confidence.",
+    cta: "Start Max",
+    bestFor: "Best for: power users & serious dating.",
     features: [
-      { text: "300 credits per month", included: true },
       { text: "Deep analysis included", included: true },
-      { text: "Full intent & context breakdown", included: true },
-      { text: "Image analysis included", included: true },
-      { text: "Priority processing & support", included: true },
-      { text: "Chat history", included: true },
-      { text: "Early access to new features", included: true },
+      { text: "Full intent + context breakdown", included: true },
+      { text: "Conversation flow + next steps", included: true },
+      { text: "Best replies (multiple styles)", included: true },
+      { text: "Priority processing", included: true },
+      { text: "Priority support", included: true },
     ],
     popular: false,
   },
@@ -163,8 +175,8 @@ const Pricing = () => {
     return tiers.indexOf(tier);
   };
 
-  const getButtonText = (planTier: string) => {
-    if (!currentTier) return `Start with ${planTier}`;
+  const getButtonText = (planTier: string, planCta?: string) => {
+    if (!currentTier) return planCta || `Start ${planTier}`;
     
     const currentIndex = getTierIndex(currentTier);
     const planIndex = getTierIndex(planTier);
@@ -316,43 +328,49 @@ const Pricing = () => {
                 </div>
 
                 <h3 className="text-2xl font-bold font-display mb-1">{plan.name}</h3>
-                <p className="text-sm mb-4 text-muted-foreground">
-                  {plan.description}
+                <p className={`text-sm mb-3 ${plan.popular ? 'text-accent' : 'text-primary'}`}>
+                  {plan.headline}
                 </p>
 
-                <div className="mb-6">
+                <div className="mb-4">
                   <span className="text-4xl font-bold font-display">
                     €{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                   </span>
                   <span className="text-muted-foreground">/month</span>
                   {isYearly && (
                     <p className="text-sm mt-1 text-muted-foreground">
-                      €{plan.yearlyPrice * 12}/year billed
+                      €{(plan.yearlyPrice * 12).toFixed(0)}/year billed
                     </p>
                   )}
                 </div>
 
-                <div className={`flex items-center gap-2 mb-6 p-3 rounded-lg border ${
-                  plan.popular ? 'bg-accent/15 border-accent/30' : 'bg-primary/10 border-primary/25'
-                }`}>
-                  <Zap className={`h-4 w-4 ${plan.popular ? 'text-accent' : 'text-primary'}`} />
-                  <span className="font-semibold">{plan.credits}</span>
-                </div>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {plan.subline}
+                </p>
 
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground/70 mb-3">
+                  What you get
+                </p>
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
                       <Check className={`h-4 w-4 mt-0.5 flex-shrink-0 ${
                         feature.included
-                          ? 'text-success'
+                          ? feature.highlight ? 'text-accent' : 'text-success'
                           : 'text-muted-foreground/30'
                       }`} />
-                      <span className={!feature.included ? 'text-muted-foreground/50' : ''}>
+                      <span className={`${!feature.included ? 'text-muted-foreground/50' : ''} ${feature.highlight ? 'text-foreground font-medium' : ''}`}>
                         {feature.text}
                       </span>
                     </li>
                   ))}
                 </ul>
+
+                {plan.bestFor && (
+                  <p className="text-xs text-muted-foreground/60 mb-4 pb-4 border-b border-border/50">
+                    {plan.bestFor}
+                  </p>
+                )}
 
                 <Button
                   variant={isCurrent ? "default" : plan.popular ? "hero" : "hero-outline"}
@@ -367,7 +385,7 @@ const Pricing = () => {
                       Processing...
                     </>
                   ) : (
-                    getButtonText(plan.tier)
+                    getButtonText(plan.tier, plan.cta)
                   )}
                 </Button>
               </motion.div>
