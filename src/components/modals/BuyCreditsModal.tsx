@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { X, Zap, CreditCard, Loader2, Check, Sparkles } from "lucide-react";
+import { X, Zap, CreditCard, Loader2, Check, Sparkles, Star, Crown } from "lucide-react";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
@@ -122,10 +122,10 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                 Get extra credits for more analyses
               </p>
               {currentTier !== "free" && (
-                <div className="mt-2 sm:mt-3 inline-block px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase">
+                <div className="mt-2 sm:mt-3 inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase">
                   {currentTier === "pro" && "Pro Tier"}
-                  {currentTier === "plus" && "Plus Tier ⭐"}
-                  {currentTier === "max" && "Max Tier 👑"}
+                  {currentTier === "plus" && <><Star className="h-3 w-3" />Plus Tier</>}
+                  {currentTier === "max" && <><Crown className="h-3 w-3" />Max Tier</>}
                 </div>
               )}
             </div>
@@ -208,13 +208,13 @@ export const BuyCreditsModal = ({ isOpen, onClose, currentTier = "free" }: BuyCr
                 </div>
                 <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                   <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
-                    💳 Visa
+                    Visa
                   </div>
                   <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
-                    💳 Mastercard
+                    Mastercard
                   </div>
                   <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-foreground">
-                    🏦 iDEAL
+                    iDEAL
                   </div>
                   <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-card rounded-lg border border-white/10 text-[10px] sm:text-xs font-medium text-muted-foreground">
                     +more

@@ -319,7 +319,7 @@ const BadgesContent = () => {
                     {Object.keys(groupedLocked).length === 0 ? (
                       <div className="card-elevated p-8 sm:p-12 text-center">
                         <Trophy className="h-10 w-10 sm:h-12 sm:w-12 text-accent mx-auto mb-3 sm:mb-4" />
-                        <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Alle badges ontgrendeld! 🎉</h3>
+                        <h3 className="font-bold text-foreground mb-2 text-sm sm:text-base">Alle badges ontgrendeld!</h3>
                         <p className="text-muted-foreground text-xs sm:text-sm">
                           Geweldig werk! Je hebt alle beschikbare badges verdiend.
                         </p>

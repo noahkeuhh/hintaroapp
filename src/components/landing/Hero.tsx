@@ -221,7 +221,7 @@ export const Hero = ({ onSignupClick, onPricingClick }: HeroProps) => {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-6 -right-6 bg-gradient-to-br from-success to-primary text-white px-5 py-2.5 rounded-2xl shadow-xl text-sm font-bold border border-white/20 shadow-accent"
             >
-              +85% match rate ✨
+              +85% match rate
             </motion.div>
             
             <motion.div
