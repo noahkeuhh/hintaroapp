@@ -321,24 +321,30 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
 
       const file = new File([blob], `hintaro-${exportFormat}.png`, { type: "image/png" });
 
-      // Check if Web Share API with files is supported
+      // 1. Try Web Share API with files (best UX on mobile)
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: "My Hintaro Analysis",
           text: caption,
           files: [file],
         });
-        toast({ title: "Shared!", description: "Card shared successfully" });
+        toast({ title: "Shared!", description: "Card shared with image and caption." });
       } else if (navigator.share) {
-        // Fallback: share without file (just text + url)
+        // 2. Fallback: Web Share API without files (text + url only)
         await navigator.share({
           title: "My Hintaro Analysis",
-          text: caption,
-          url: "https://hintaro.com",
+          text: caption + " https://hintaro.com",
         });
-        toast({ title: "Shared!", description: "Link shared - download image separately" });
+        toast({ title: "Link shared!", description: "Image cannot be attached automatically. Download image below and share manually." });
+        // Prompt user to download image after sharing link
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.download = `hintaro-${exportFormat}-${Date.now()}.png`;
+          link.href = finalCanvas.toDataURL("image/png", 1.0);
+          link.click();
+        }, 500);
       } else {
-        // Desktop fallback: copy caption + download
+        // 3. Desktop fallback: copy caption and download image
         await navigator.clipboard.writeText(caption);
         const link = document.createElement("a");
         link.download = `hintaro-${exportFormat}-${Date.now()}.png`;
@@ -346,7 +352,7 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
         link.click();
         toast({ 
           title: "Ready to share!", 
-          description: "Image downloaded & caption copied. Share on your favorite app!" 
+          description: "Image downloaded and caption copied. Paste caption and upload image in your favorite app." 
         });
       }
     } catch (error: any) {
@@ -365,6 +371,18 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (viral.score_visual / 100) * circumference;
 
+  // Inline font styles for export fidelity
+  const cardFontFamily = {
+    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+    fontWeight: 500,
+    letterSpacing: '-0.01em',
+  };
+  const headingFontFamily = {
+    fontFamily: "'Space Grotesk', system-ui, sans-serif",
+    fontWeight: 700,
+    letterSpacing: '-0.02em',
+  };
+
   return (
     <div className="space-y-4 max-w-md mx-auto">
       {/* ════════════════════════════════════════════════════════════════════ */}
@@ -373,12 +391,12 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
       <div
         ref={cardRef}
         className="relative overflow-hidden rounded-2xl border border-white/5 p-6"
-        style={{ backgroundColor: "#0a0a0f" }}
+        style={{ backgroundColor: "#0a0a0f", ...cardFontFamily }}
       >
         <div className="flex flex-col items-center text-center gap-4">
           
           {/* TOP: Mini branding with logo */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5" style={cardFontFamily}>
             <img
               src="/img/apple-touch-icon.png"
               alt="Hintaro logo"
@@ -387,19 +405,19 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
             />
             <span 
               className="text-[10px] font-semibold tracking-[0.15em] uppercase"
-              style={{ color: "rgba(255,255,255,0.4)" }}
+              style={{ color: "rgba(255,255,255,0.4)", ...cardFontFamily, fontWeight: 600, fontSize: 10 }}
             >
               Hintaro
             </span>
           </div>
 
           {/* HERO SCORE - Compact */}
-          <div className="relative" style={{ width: "112px", height: "112px" }}>
+          <div className="relative flex items-center justify-center" style={{ width: "112px", height: "112px" }}>
             <svg 
               width="112" 
               height="112" 
               viewBox="0 0 120 120"
-              style={{ transform: "rotate(-90deg)" }}
+              style={{ display: 'block', transform: "rotate(-90deg)" }}
             >
               {/* Background track */}
               <circle
@@ -422,18 +440,18 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
               />
             </svg>
             <div 
-              className="absolute flex flex-col items-center justify-center"
-              style={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center pointer-events-none"
+              style={{ zIndex: 2 }}
             >
               <span 
                 className="text-[8px] uppercase tracking-[0.2em] mb-0.5"
-                style={{ color: "rgba(255,255,255,0.35)" }}
+                style={{ color: "rgba(255,255,255,0.35)", ...cardFontFamily, fontWeight: 700, fontSize: 8, lineHeight: 1 }}
               >
                 Interest
               </span>
               <span 
                 className="text-3xl font-black tracking-tight"
-                style={{ color: getTextColor(viral.score_visual) }}
+                style={{ color: getTextColor(viral.score_visual), ...headingFontFamily, fontWeight: 900, fontSize: 36, lineHeight: 1 }}
               >
                 {viral.score_visual}%
               </span>
@@ -443,7 +461,7 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
           {/* STAMP BADGE */}
           <div 
             className="inline-flex items-center px-3.5 py-1.5 rounded-full border font-bold text-xs tracking-wider"
-            style={getStampInlineStyle(viral.stamp)}
+            style={{ ...getStampInlineStyle(viral.stamp), ...cardFontFamily, fontWeight: 700, fontSize: 13 }}
           >
             {viral.stamp}
           </div>
@@ -451,8 +469,8 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
           {/* HEADLINE (optional) */}
           {viral.headline && (
             <p 
-              className="text-xs italic max-w-[240px] line-clamp-1"
-              style={{ color: "rgba(255,255,255,0.3)" }}
+              className="text-xs italic max-w-[240px]"
+              style={{ color: "rgba(255,255,255,0.3)", ...cardFontFamily, fontStyle: 'italic', fontSize: 13, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
             >
               "{viral.headline}"
             </p>
@@ -460,8 +478,8 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
 
           {/* VERDICT */}
           <p 
-            className="text-base font-semibold max-w-[280px] leading-snug line-clamp-2"
-            style={{ color: "rgba(255,255,255,0.95)" }}
+            className="text-base font-semibold max-w-[280px] leading-snug"
+            style={{ color: "rgba(255,255,255,0.95)", ...cardFontFamily, fontWeight: 600, fontSize: 16, whiteSpace: 'pre-line' }}
           >
             {viral.shareable_quote}
           </p>
@@ -469,7 +487,7 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
           {/* SIGNAL STRIP */}
           <div 
             className="flex items-center gap-2 text-[11px]"
-            style={{ color: "rgba(255,255,255,0.4)" }}
+            style={{ color: "rgba(255,255,255,0.4)", ...cardFontFamily, fontSize: 11 }}
           >
             <span className="flex items-center gap-1">
               <span>🎭</span>
@@ -490,7 +508,7 @@ export const ViralShareCard = ({ analysis }: ViralShareCardProps) => {
           {/* BOTTOM: URL */}
           <div 
             className="text-xs font-medium tracking-wider pt-1"
-            style={{ color: "rgba(255,255,255,0.2)" }}
+            style={{ color: "rgba(255,255,255,0.2)", ...cardFontFamily, fontWeight: 500, fontSize: 13 }}
           >
             hintaro.com
           </div>
