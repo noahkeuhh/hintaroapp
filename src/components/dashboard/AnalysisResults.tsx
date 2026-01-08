@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 import { AnalysisResult } from "./AnalysisWorkspace";
-import { ShareableScorecard } from "./ShareableScorecard";
+import { ViralShareCard } from "./ViralShareCard";
 import {
   Copy,
   Check,
@@ -136,10 +136,13 @@ export const AnalysisResults = ({
         text: typeof text === "string" ? text : String(text),
       }));
 
-  // Get interest level (0-100 scale)
-  const interestLevel = typeof result.interest_level === "string"
-    ? parseInt(result.interest_level)
-    : result.interest_level || 0;
+  // Get interest level (0-100 scale) - always show, default to 50 if missing
+  const rawInterest = typeof result.interest_level === "string"
+    ? parseInt(result.interest_level.replace("%", ""), 10)
+    : result.interest_level;
+  const interestLevel = typeof rawInterest === "number" && !isNaN(rawInterest)
+    ? Math.min(100, Math.max(0, rawInterest))
+    : 50;
 
   // Get explanation
   const explanation = result.explanation
@@ -193,21 +196,17 @@ export const AnalysisResults = ({
               <span className="xs:hidden">Deep</span>
             </TabsTrigger>
           )}
-          {result.viral_card && (
-            <TabsTrigger value="share" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3">
-              <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden xs:inline">Share</span>
-              <span className="xs:hidden">Share</span>
-            </TabsTrigger>
-          )}
+          <TabsTrigger value="share" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3">
+            <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span>Share</span>
+          </TabsTrigger>
         </TabsList>
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
           {/* Interest level - show first on mobile */}
           <div className="lg:hidden">
-            {interestLevel > 0 && (
-              <div className="card-elevated p-3 sm:p-4">
+            <div className="card-elevated p-3 sm:p-4">
                 <div className="flex items-center gap-3">
                   <p className="text-xs text-muted-foreground font-medium whitespace-nowrap">Interest</p>
                   <div className="flex-1">
@@ -227,7 +226,6 @@ export const AnalysisResults = ({
                   <span className="text-lg font-bold text-foreground">{interestLevel}%</span>
                 </div>
               </div>
-            )}
           </div>
 
           <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
@@ -336,37 +334,35 @@ export const AnalysisResults = ({
             {/* Right sidebar: Interest level and info - hidden on mobile (shown above) */}
             <div className="hidden lg:block space-y-4">
               {/* Interest level with colored bar */}
-              {interestLevel > 0 && (
-                <div className="card-elevated p-5">
-                  <p className="text-xs text-muted-foreground mb-3 font-medium">Interest Level</p>
-                  <div className="flex items-end gap-3 mb-2">
-                    <div className="flex-1">
-                      <div className="h-3 bg-muted rounded-full overflow-hidden">
-                        <div
-                          className={`h-full rounded-full transition-all ${
-                            interestLevel < 40
-                              ? "bg-destructive"
-                              : interestLevel < 70
-                              ? "bg-warning"
-                              : "bg-success"
-                          }`}
-                          style={{ width: `${interestLevel}%` }}
-                        />
-                      </div>
+              <div className="card-elevated p-5">
+                <p className="text-xs text-muted-foreground mb-3 font-medium">Interest Level</p>
+                <div className="flex items-end gap-3 mb-2">
+                  <div className="flex-1">
+                    <div className="h-3 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          interestLevel < 40
+                            ? "bg-destructive"
+                            : interestLevel < 70
+                            ? "bg-warning"
+                            : "bg-success"
+                        }`}
+                        style={{ width: `${interestLevel}%` }}
+                      />
                     </div>
-                    <span className="text-xl font-bold text-foreground w-12 text-right">
-                      {interestLevel}%
-                    </span>
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {interestLevel < 40
-                      ? "Low interest - Build rapport"
-                      : interestLevel < 70
-                      ? "Moderate interest - Keep momentum"
-                      : "High interest - Time to escalate"}
-                  </div>
+                  <span className="text-xl font-bold text-foreground w-12 text-right">
+                    {interestLevel}%
+                  </span>
                 </div>
-              )}
+                <div className="text-xs text-muted-foreground">
+                  {interestLevel < 40
+                    ? "Low interest - Build rapport"
+                    : interestLevel < 70
+                    ? "Moderate interest - Keep momentum"
+                    : "High interest - Time to escalate"}
+                </div>
+              </div>
 
               {/* Upgrade info - Only show for PRO tier (PLUS/MAX have auto-mode) */}
               {subscriptionTier === 'pro' && analysisMode === "snapshot" && (
@@ -571,21 +567,10 @@ export const AnalysisResults = ({
           </TabsContent>
         )}
 
-        {/* Share Tab - Viral Scorecard */}
-        {result.viral_card && (
-          <TabsContent value="share" className="mt-6">
-            <div className="card-elevated p-4 sm:p-6">
-              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2 text-base sm:text-lg">
-                <Share2 className="h-5 w-5 text-accent" />
-                Share Your Score
-              </h3>
-              <p className="text-muted-foreground text-sm mb-6">
-                Download a shareable scorecard for social media. No personal info or messages included.
-              </p>
-              <ShareableScorecard viralCard={result.viral_card} />
-            </div>
-          </TabsContent>
-        )}
+        {/* Share Tab - Viral Share Card */}
+        <TabsContent value="share" className="mt-6">
+          <ViralShareCard analysis={result} />
+        </TabsContent>
       </Tabs>
     </motion.div>
   );

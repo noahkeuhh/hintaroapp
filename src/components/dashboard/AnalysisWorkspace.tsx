@@ -431,6 +431,9 @@ export const AnalysisWorkspace = () => {
       recommended_timing: apiResult.recommended_timing || "Wait",
       suggested_replies: apiResult.suggested_replies || [],
       
+      // Viral card (always present)
+      ...(apiResult.viral_card !== undefined && { viral_card: apiResult.viral_card }),
+      
       // Optional fields based on mode/tier
       ...(apiResult.interest_level !== undefined && { interest_level: apiResult.interest_level }),
       ...(apiResult.explanation !== undefined && { explanation: apiResult.explanation }),
