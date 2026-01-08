@@ -25,6 +25,14 @@ import {
 type AnalysisState = "idle" | "loading" | "results";
 type AnalysisMode = "snapshot" | "expanded" | "deep";
 
+export interface ViralCard {
+  headline: string;
+  stamp: "GREEN SIGNAL" | "MIXED SIGNAL" | "RED FLAG";
+  shareable_quote: string;
+  score_visual: number;
+  roast_level: "mild" | "spicy";
+}
+
 export interface AnalysisResult {
   // Required fields (all modes)
   intent: string;
@@ -33,6 +41,9 @@ export interface AnalysisResult {
   emotional_risk: "low" | "medium" | "high";
   recommended_timing: string;
   suggested_replies: Array<string | { type: string; text: string }> | Record<string, string>; // Array for snapshot/expanded, object for deep
+  
+  // Viral Card - always present in all modes
+  viral_card?: ViralCard;
   
   // Optional fields (conditional on mode/tier)
   interest_level?: number | string; // 0-100, present for Plus/Max expanded/deep

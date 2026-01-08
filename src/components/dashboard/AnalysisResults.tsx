@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 import { AnalysisResult } from "./AnalysisWorkspace";
+import { ShareableScorecard } from "./ShareableScorecard";
 import {
   Copy,
   Check,
@@ -22,6 +23,7 @@ import {
   BookOpen,
   Layers,
   ChevronDown,
+  Share2,
 } from "lucide-react";
 
 type AnalysisMode = "snapshot" | "expanded" | "deep";
@@ -189,6 +191,13 @@ export const AnalysisResults = ({
               <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden xs:inline">Deep Analysis</span>
               <span className="xs:hidden">Deep</span>
+            </TabsTrigger>
+          )}
+          {result.viral_card && (
+            <TabsTrigger value="share" className="gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-3">
+              <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden xs:inline">Share</span>
+              <span className="xs:hidden">Share</span>
             </TabsTrigger>
           )}
         </TabsList>
@@ -559,6 +568,22 @@ export const AnalysisResults = ({
                 </p>
               </div>
             )}
+          </TabsContent>
+        )}
+
+        {/* Share Tab - Viral Scorecard */}
+        {result.viral_card && (
+          <TabsContent value="share" className="mt-6">
+            <div className="card-elevated p-4 sm:p-6">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2 text-base sm:text-lg">
+                <Share2 className="h-5 w-5 text-accent" />
+                Share Your Score
+              </h3>
+              <p className="text-muted-foreground text-sm mb-6">
+                Download a shareable scorecard for social media. No personal info or messages included.
+              </p>
+              <ShareableScorecard viralCard={result.viral_card} />
+            </div>
           </TabsContent>
         )}
       </Tabs>

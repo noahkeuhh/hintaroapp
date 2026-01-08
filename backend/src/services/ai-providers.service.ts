@@ -3,6 +3,14 @@ import Groq from 'groq-sdk';
 
 export type AIProvider = 'groq'; // Only Groq supported now
 
+export interface ViralCard {
+  headline: string;
+  stamp: 'GREEN SIGNAL' | 'MIXED SIGNAL' | 'RED FLAG';
+  shareable_quote: string;
+  score_visual: number;
+  roast_level: 'mild' | 'spicy';
+}
+
 export interface AIAnalysisResult {
   intent: string;
   tone: string;
@@ -12,6 +20,7 @@ export interface AIAnalysisResult {
   recommended_timing: 'direct' | 'later' | 'wait';
   tokens_used: number;
   interest_level: string; // Always present - percentage string like "65%"
+  viral_card: ViralCard; // Always present - shareable scorecard data
   explanation?: string | {
     meaning_breakdown?: string;
     emotional_context?: string;
@@ -221,6 +230,12 @@ async function callGroq(
       };
     }
 
+    // Compute viral_card deterministically
+    const viralCard = computeViralCard(
+      content,
+      subscriptionTier,
+    );
+
     const parsedResult: AIAnalysisResult = {
       intent: content.intent || content.intentLabel || 'Unknown',
       tone: content.tone || 'neutral',
@@ -230,6 +245,7 @@ async function callGroq(
       recommended_timing: content.recommended_timing || 'later',
       tokens_used: response.usage?.total_tokens || estimateTokens(inputText),
       interest_level: content.interest_level || '50%', // Always include interest_level, default to 50% if missing
+      viral_card: viralCard, // Always include viral_card
       ...(content.explanation && { explanation: content.explanation }),
       ...(content.conversation_flow && { conversation_flow: content.conversation_flow }),
       ...(content.escalation_advice && { escalation_advice: content.escalation_advice }),
@@ -241,6 +257,7 @@ async function callGroq(
       hasTone: !!parsedResult.tone,
       repliesCount: Array.isArray(parsedResult.suggested_replies) ? parsedResult.suggested_replies.length : Object.keys(parsedResult.suggested_replies || {}).length,
       tokens: parsedResult.tokens_used,
+      hasViralCard: !!parsedResult.viral_card,
     });
     
     return parsedResult;
@@ -291,4 +308,71 @@ function parseSuggestedReplies(replies: any): string[] | Record<string, string> 
 
 function estimateTokens(text: string): number {
   return Math.ceil((text?.length || 0) / 4);
+}
+
+/**
+ * Compute viral_card deterministically from AI response
+ * - stamp: based on interest_level and emotional_risk
+ * - score_visual: always equals interest_level (0-100)
+ * - roast_level: default "mild", "spicy" only for Pro/Plus/Max if tone is flirty and not high risk
+ * - headline/shareable_quote: from AI or fallback defaults
+ */
+function computeViralCard(
+  content: any,
+  subscriptionTier: string,
+): ViralCard {
+  // Parse interest_level to number (0-100)
+  const interestLevelStr = content.interest_level || '50%';
+  const interestLevel = parseInt(interestLevelStr.replace('%', ''), 10) || 50;
+  
+  // Get emotional_risk
+  const emotionalRisk = (content.emotional_risk || 'medium') as 'low' | 'medium' | 'high';
+  
+  // Compute stamp deterministically
+  let stamp: 'GREEN SIGNAL' | 'MIXED SIGNAL' | 'RED FLAG';
+  if (interestLevel >= 75 && emotionalRisk !== 'high') {
+    stamp = 'GREEN SIGNAL';
+  } else if (interestLevel >= 45 && interestLevel <= 74) {
+    stamp = 'MIXED SIGNAL';
+  } else {
+    stamp = 'RED FLAG';
+  }
+  
+  // score_visual always equals interest_level
+  const scoreVisual = interestLevel;
+  
+  // Determine roast_level
+  // Free tier always mild, Pro/Plus/Max can be spicy if tone is flirty/teasing and not high risk
+  let roastLevel: 'mild' | 'spicy' = 'mild';
+  if (subscriptionTier !== 'free' && emotionalRisk !== 'high') {
+    const tone = (content.tone || '').toLowerCase();
+    const flirtyTones = ['flirty', 'teasing', 'playful', 'suggestive', 'cheeky', 'bold'];
+    if (flirtyTones.some(t => tone.includes(t))) {
+      roastLevel = 'spicy';
+    }
+  }
+  
+  // Get headline from AI (truncate to 28 chars) or fallback
+  let headline = content.viral_card?.headline || '';
+  if (!headline) {
+    // Generate fallback headline from intent
+    headline = content.intent ? content.intent.substring(0, 28) : 'Message Decoded';
+  }
+  headline = headline.substring(0, 28);
+  
+  // Get shareable_quote from AI (truncate to 80 chars) or fallback
+  let shareableQuote = content.viral_card?.shareable_quote || '';
+  if (!shareableQuote) {
+    // Generate fallback quote
+    shareableQuote = `Interest at ${interestLevel}% - ${stamp.toLowerCase()}`;
+  }
+  shareableQuote = shareableQuote.substring(0, 80);
+  
+  return {
+    headline,
+    stamp,
+    shareable_quote: shareableQuote,
+    score_visual: scoreVisual,
+    roast_level: roastLevel,
+  };
 }

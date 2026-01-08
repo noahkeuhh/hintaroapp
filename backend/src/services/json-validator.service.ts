@@ -5,6 +5,17 @@ import { z } from 'zod';
  * Ensures all responses match the exact specification
  */
 
+// Viral Card Schema - always included in ALL responses
+export const ViralCardSchema = z.object({
+  headline: z.string().max(28).describe('Short catchy headline max 28 chars'),
+  stamp: z.enum(['GREEN SIGNAL', 'MIXED SIGNAL', 'RED FLAG']).describe('Signal stamp'),
+  shareable_quote: z.string().max(80).describe('Shareable quote max 80 chars'),
+  score_visual: z.number().min(0).max(100).describe('Interest level 0-100'),
+  roast_level: z.enum(['mild', 'spicy']).describe('Roast intensity'),
+});
+
+export type ViralCard = z.infer<typeof ViralCardSchema>;
+
 // SNAPSHOT response schema
 export const SnapshotResponseSchema = z.object({
   intent: z.string().describe('Emotie/bedoeling van het bericht'),
@@ -14,6 +25,7 @@ export const SnapshotResponseSchema = z.object({
   recommended_timing: z.string().describe('Wanneer reageren'),
   suggested_replies: z.array(z.string()).min(2).describe('2+ reply opties'),
   interest_level: z.string().optional().describe('Percentage string 0-100%'),
+  viral_card: ViralCardSchema.describe('Shareable viral card data'),
 });
 
 export type SnapshotResponse = z.infer<typeof SnapshotResponseSchema>;
@@ -28,6 +40,7 @@ export const ExpandedResponseSchema = z.object({
   explanation: z.string().describe('Gedetailleerde uitleg van de boodschap'),
   suggested_replies: z.array(z.string()).min(3).describe('3 reply opties'),
   interest_level: z.string().optional().describe('Percentage string 0-100%'),
+  viral_card: ViralCardSchema.describe('Shareable viral card data'),
   // Optional v2 details block
   details: z.object({
     summary_one_liner: z.string().optional(),
@@ -90,6 +103,7 @@ export const DeepResponseSchema = z.object({
   escalation_advice: z.string().describe('Advies voor escalatie'),
   risk_mitigation: z.string().describe('Risicobeperkingsadvies'),
   interest_level: z.string().optional().describe('Percentage string 0-100%'),
+  viral_card: ViralCardSchema.describe('Shareable viral card data'),
   // Optional v2 details block (MAX tier)
   details: z.object({
     summary_one_liner: z.string().optional(),

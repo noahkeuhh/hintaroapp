@@ -34,9 +34,12 @@ Required fields:
 - explanation: one short paragraph
 - suggested_replies: exactly 2 reply strings
 - interest_level: percentage string like "65%"
+- viral_card: object with:
+  - headline: catchy 1-line summary (MAX 28 chars, be concise!)
+  - shareable_quote: witty insight (MAX 80 chars, be concise!)
 
 Return valid JSON object only.`,
-          maxTokens: 300,
+          maxTokens: 350,
           temperature: 0.7,
         };
       }
@@ -53,9 +56,12 @@ Required fields:
 - recommended_timing: when to respond
 - suggested_replies: exactly 2 reply strings
 - interest_level: percentage string like "65%"
+- viral_card: object with:
+  - headline: catchy 1-line summary (MAX 28 chars, be concise!)
+  - shareable_quote: witty insight (MAX 80 chars, be concise!)
 
 Return valid JSON object only.`,
-        maxTokens: 250,
+        maxTokens: 300,
         temperature: 0.7,
       };
 
@@ -76,6 +82,9 @@ Required core fields:
 - explanation: one sentence explanation
 - suggested_replies: array of exactly 3 reply strings
 - interest_level: percentage string like "70%"
+- viral_card: object with:
+  - headline: catchy 1-line summary (MAX 28 chars, be concise!)
+  - shareable_quote: witty insight (MAX 80 chars, be concise!)
 
 Required details field (PRO tier):
 - details object with:
@@ -84,7 +93,7 @@ Required details field (PRO tier):
   - signals object with positive field (array of max 2 strings)
 
 Return valid JSON object. All fields required.`,
-          maxTokens: 380,
+          maxTokens: 430,
           temperature: 0.7,
         };
       } else {
@@ -102,6 +111,9 @@ Required core fields:
 - explanation: one to two sentence explanation
 - suggested_replies: array of exactly 3 reply strings
 - interest_level: percentage string like "75%"
+- viral_card: object with:
+  - headline: catchy 1-line summary (MAX 28 chars, be concise!)
+  - shareable_quote: witty insight (MAX 80 chars, be concise!)
 
 Required details field (PLUS tier):
 - details object with:
@@ -113,7 +125,7 @@ Required details field (PLUS tier):
   - next_steps array with 2-3 strings
 
 Return valid JSON object. All fields required.`,
-          maxTokens: 520,
+          maxTokens: 570,
           temperature: 0.7,
         };
       }
@@ -136,6 +148,9 @@ Required core fields:
 - escalation_advice: string with escalation advice
 - risk_mitigation: string with risk mitigation advice
 - interest_level: percentage string like "80%"
+- viral_card: object with:
+  - headline: catchy 1-line summary (MAX 28 chars, be concise!)
+  - shareable_quote: witty insight (MAX 80 chars, be concise!)
 
 Required details field (MAX tier):
 - details object with:
@@ -148,7 +163,7 @@ Required details field (MAX tier):
   - what_not_to_send array with 2-3 strings
 
 Return valid JSON object. All fields required. Use realistic values.`,
-        maxTokens: 750,
+        maxTokens: 800,
         temperature: 0.8,
       };
 
