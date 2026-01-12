@@ -39,6 +39,23 @@ app.get('/', (req, res) => {
   });
 });
 
+// CORS fallback: voeg headers toe aan alle responses, ook 404/204
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', [
+    'https://hintaro.com',
+    'https://api.hintaro.com',
+    'http://localhost:8080',
+    'http://localhost:5173',
+  ].includes(req.headers.origin) ? req.headers.origin : '');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,Idempotency-Key');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Unhandled error:', err);
