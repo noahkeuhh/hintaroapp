@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: "Can I analyze screenshots?",
-    answer: "Yes. Upload a screenshot of the chat. Image analysis is supported on all paid plans."
+    answer: "Yes. Upload a screenshot of the chat. Image analysis is supported on plus and max plans."
   },
   {
     question: "Is my data stored? How private is this?",
