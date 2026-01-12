@@ -11,6 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://hintaro.com',
+    'https://www.hintaro.com', 
     'https://api.hintaro.com',
     'http://localhost:8080',
     'http://localhost:5173',
