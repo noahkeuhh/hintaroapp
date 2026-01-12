@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Send, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Mail, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -239,44 +239,12 @@ const Contact = () => {
                         className="text-sm hover:underline"
                         style={{ color: "#9BA3B4" }}
                       >
-                        support@hintaro.com
+                        info@hintaro.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: "rgba(122, 124, 255, 0.1)" }}
-                    >
-                      <Phone className="h-5 w-5" style={{ color: "#7A7CFF" }} />
-                    </div>
-                    <div>
-                      <p className="font-medium" style={{ color: "#E9ECF5" }}>
-                        Phone
-                      </p>
-                      <p className="text-sm" style={{ color: "#9BA3B4" }}>
-                        +31 (0)20 123 4567
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: "rgba(92, 225, 230, 0.1)" }}
-                    >
-                      <MapPin className="h-5 w-5" style={{ color: "#5CE1E6" }} />
-                    </div>
-                    <div>
-                      <p className="font-medium" style={{ color: "#E9ECF5" }}>
-                        Address
-                      </p>
-                      <p className="text-sm" style={{ color: "#9BA3B4" }}>
-                        Amsterdam, Netherlands
-                      </p>
-                    </div>
-                  </div>
+                  {/* Telefoon en locatie verwijderd zoals gevraagd */}
                 </div>
               </div>
 
@@ -315,8 +283,7 @@ const Contact = () => {
                   Quick response
                 </h3>
                 <p className="text-sm" style={{ color: "#9BA3B4" }}>
-                  We respond to all messages within 24 hours. For urgent questions,
-                  call us during business hours (9:00 AM - 5:00 PM).
+                  We respond to all messages within 24 hours.
                 </p>
               </div>
             </div>
