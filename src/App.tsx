@@ -17,6 +17,8 @@ import SavedReplies from "./pages/SavedReplies";
 import Badges from "./pages/Badges";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +32,18 @@ const queryClient = new QueryClient({
   },
 });
 
+function GoogleAnalytics() {
+  const location = useLocation();
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag("config", "G-TWV0GS75XX", {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+  return null;
+}
+
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
@@ -38,6 +52,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <GoogleAnalytics />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/pricing" element={<Pricing />} />
